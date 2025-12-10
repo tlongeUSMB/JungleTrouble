@@ -19,6 +19,24 @@ namespace JungleTrouble
         public MainWindow()
         {
             InitializeComponent();
+            AfficheDemarrage();
         }
+        private void AfficheDemarrage()
+        {
+            // crée et charge l'écran de démarrage
+            UCRegles uc = new UCRegles();
+
+            // associe l'écran au conteneur
+            ZoneJeu.Content = uc;
+            uc.butstart.Click += AfficherChoixPerso;
+        }
+
+        private void AfficherChoixPerso(object sender, RoutedEventArgs e)
+        {
+            UCChoixPerso uc = new UCChoixPerso();
+            ZoneJeu.Content = uc;
+        }
+
+
     }
 }
