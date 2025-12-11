@@ -20,7 +20,8 @@ namespace JungleTrouble
     public partial class UCJeu : UserControl
     {
         private DispatcherTimer minuterie;
-        private double GRAVITY = 0.99;
+        private double GRAVITY = 0.98;
+        private double JUMPSTRENGTH = 50;
         private double WIDTHPERSO = 18, HEIGHTPERSO = 30;
         private static readonly double[,] plateformes = { { 0, 20, 0, 800}, { 107.5, 127.5, 0, 650}, { 215, 235, 150, 800}, { 322.5, 342.5, 0, 650 } };
         private static readonly Rect hitboxPlateforme0 = new Rect(0, 0, 800, 20);
@@ -96,13 +97,13 @@ namespace JungleTrouble
             if (e.Key == Key.Left && Canvas.GetLeft(imgPerso) > 0)
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) - 5);
             if (e.Key == Key.Up && (hitboxPerso.IntersectsWith(hitboxPlateforme0) || hitboxPerso.IntersectsWith(hitboxPlateforme1) || hitboxPerso.IntersectsWith(hitboxPlateforme2) || hitboxPerso.IntersectsWith(hitboxPlateforme3)))
-                Saut();
+                Canvas.SetBottom(imgPerso, objY + JUMPSTRENGTH);
         }
 
-        private void Saut()
-        {
+        //private void Saut(Rect hitboxPerso)
+        //{
             
-        }
+        //}
 
     }
 }
