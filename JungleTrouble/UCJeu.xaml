@@ -7,6 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Canvas>
-        
+        <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="0" Width="800"/>
+        <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="107.5" Width="700"/>
+        <Image Height="20" Canvas.Left="100" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="215" Width="700"/>
+        <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="322.5" Width="700"/>
+        <Image x:Name="imgPerso"  Height="30" Canvas.Left="251" Source="/Images/placeholder2.png" Stretch="Fill" Canvas.Bottom="400" Width="18"/>
+
     </Canvas>
 </UserControl>

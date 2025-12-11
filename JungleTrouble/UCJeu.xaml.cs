@@ -20,16 +20,23 @@ namespace JungleTrouble
     public partial class UCJeu : UserControl
     {
         private DispatcherTimer minuterie;
-        private double GRAVITY = 0.9;
+        private double GRAVITY = 0.99;
+        private double WIDTHPERSO = 18, HEIGHTPERSO = 30;
         private static readonly double[,] plateformes = { { 0, 20, 0, 800}, { 107.5, 127.5, 0, 650}, { 215, 235, 150, 800}, { 322.5, 342.5, 0, 650 } };
+        private static readonly Rect hitboxPlateforme0 = new Rect(0, 0, 800, 20);
+        private static readonly Rect hitboxPlateforme1 = new Rect(0, 107.5, 700, 20);
+        private static readonly Rect hitboxPlateforme2 = new Rect(100, 215, 700, 20);
+        private static readonly Rect hitboxPlateforme3 = new Rect(0, 322.5, 700, 20);
         public UCJeu()
         {
             InitializeComponent();
+            InitializeTimer();
+
         }
-        private void InitializeTimer(object sender, EventArgs e)
+        private void InitializeTimer()
         {
             minuterie = new DispatcherTimer();
-            minuterie.Interval = TimeSpan.FromMilliseconds(16);
+            minuterie.Interval = TimeSpan.FromMilliseconds(1);
             minuterie.Tick += GameLoop;
             minuterie.Start();
         }
@@ -39,32 +46,30 @@ namespace JungleTrouble
         }
         private void Collision(Image obj)
         {
-            double objYBottom = Canvas.GetBottom(obj);
-            double objYTop = objYBottom + obj.Height;
-            int nbPlateforme = 0;
-            bool found = false;
-            do
-            {
-                int i = 0;
-                if ( objYBottom > plateformes[i, 1] && objYBottom <  plateformes[i, 0])
-                {
-                    nbPlateforme = i;
-                    found = true;
-                }
-                i++;
+            double objX = Canvas.GetLeft(obj);
+            double objY = Canvas.GetBottom(obj);
+            Rect hitboxPerso = new Rect(objX, objY, WIDTHPERSO, HEIGHTPERSO);
 
-            }
-            while (!found);
-            while (objYBottom > plateformes[nbPlateforme, 1])
+            if (!hitboxPerso.IntersectsWith(hitboxPlateforme0) && !hitboxPerso.IntersectsWith(hitboxPlateforme1) && !hitboxPerso.IntersectsWith(hitboxPlateforme2) && !hitboxPerso.IntersectsWith(hitboxPlateforme3))
             {
-                Gravity(obj, objYBottom);
+                Canvas.SetBottom(obj, objY * GRAVITY);
             }
-        }
-        private void Gravity(Image obj, double objYBottom)
-        {
-            double vitesseYGrav = 0;
-            Canvas.SetBottom(obj, objYBottom - vitesseYGrav);
-            vitesseYGrav += GRAVITY;
+            else if (hitboxPerso.IntersectsWith(hitboxPlateforme0))
+            {
+                Canvas.SetBottom(obj, plateformes[0, 1]);
+            }
+            else if (hitboxPerso.IntersectsWith(hitboxPlateforme1))
+            {
+                Canvas.SetBottom(obj, plateformes[1, 1]);
+            }
+            else if (hitboxPerso.IntersectsWith(hitboxPlateforme2))
+            {
+                Canvas.SetBottom(obj, plateformes[2, 1]);
+            }
+            else if (hitboxPerso.IntersectsWith(hitboxPlateforme3))
+            {
+                Canvas.SetBottom(obj, plateformes[3, 1]);
+            }
         }
     }
 }

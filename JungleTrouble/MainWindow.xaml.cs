@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace JungleTrouble
 {
@@ -35,8 +36,12 @@ namespace JungleTrouble
         {
             UCChoixPerso uc = new UCChoixPerso();
             ZoneJeu.Content = uc;
+            uc.butJouer.Click += AfficherJeu;
         }
-
-
+        private void AfficherJeu(object sender, RoutedEventArgs e)
+        {
+            UCJeu uc = new UCJeu();
+            ZoneJeu.Content = uc;
+        }
     }
 }
