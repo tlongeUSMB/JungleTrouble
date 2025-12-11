@@ -1,0 +1,21 @@
+﻿<Window x:Class="JungleTrouble.ParametreWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JungleTrouble"
+        mc:Ignorable="d"
+        Title="ParametreWindow" Height="400" Width="300">
+    <Grid>
+        <Label Content="Son :" HorizontalAlignment="Left" Margin="25,23,0,0" VerticalAlignment="Top" Width="217" Height="25" FontSize="14"/>
+        <Label Content="vitesse des tonneaux :&#xD;&#xA;" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="265" Height="25" FontSize="14"/>
+        <Label Content="Nombre de tonneaux :" HorizontalAlignment="Left" Margin="25,250,0,0" VerticalAlignment="Top" Width="265" Height="25"/>
+        <Slider x:Name="SlisSon" HorizontalAlignment="Center" Margin="0,66,0,0" VerticalAlignment="Top" Width="120"/>
+        <Slider x:Name="Slidvitesse" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Width="120"/>
+        <Slider x:Name="Slidnombre" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.504,0.599"/>
+        <Label Content="Jeux :" HorizontalAlignment="Left" Margin="25,110,0,0" VerticalAlignment="Top" Height="50" Width="265" FontSize="20"/>
+        <Button x:Name="butclause" Content="X  " HorizontalAlignment="Right" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Height="25" Width="25" Click="butclause_Click"/>
+        <Button x:Name="butOk" Content="OK" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" Height="34" Width="90" Click="butOk_Click"/>
+
+    </Grid>
+</Window>

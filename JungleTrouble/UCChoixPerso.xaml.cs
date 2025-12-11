@@ -33,5 +33,11 @@ namespace JungleTrouble
         {
             butJouer.IsEnabled = true;
         }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ParametreWindow parametreWindow = new ParametreWindow();
+            bool? rep = parametreWindow.ShowDialog();
+        }
+
     }
 }
