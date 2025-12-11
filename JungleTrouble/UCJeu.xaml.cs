@@ -71,5 +71,30 @@ namespace JungleTrouble
                 Canvas.SetBottom(obj, plateformes[3, 1]);
             }
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.KeyDown += canvasJeu_KeyDown;
+        }
+
+      
+
+        private void canvasJeu_KeyDown(object sender, KeyEventArgs e)
+        {
+            double objX = Canvas.GetLeft(imgPerso);
+            double objY = Canvas.GetBottom(imgPerso);
+            Rect hitboxPerso = new Rect(objX, objY, WIDTHPERSO, HEIGHTPERSO);
+            if (e.Key == Key.Right && Canvas.GetLeft(imgPerso) < 764)
+                Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) + 5);
+            if (e.Key == Key.Left && Canvas.GetLeft(imgPerso) > 0)
+                Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) - 5);
+            if (e.Key == Key.Up && (hitboxPerso.IntersectsWith(hitboxPlateforme0) || hitboxPerso.IntersectsWith(hitboxPlateforme1) || hitboxPerso.IntersectsWith(hitboxPlateforme2) || hitboxPerso.IntersectsWith(hitboxPlateforme3)))
+                Saut();
+        }
+
+        private void Saut()
+        {
+            
+        }
     }
 }
