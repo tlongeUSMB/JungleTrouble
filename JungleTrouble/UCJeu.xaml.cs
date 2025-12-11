@@ -33,6 +33,13 @@ namespace JungleTrouble
             InitializeTimer();
 
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ParametreWindow parametreWindow = new ParametreWindow();
+            bool? rep = parametreWindow.ShowDialog();
+        }
+
         private void InitializeTimer()
         {
             minuterie = new DispatcherTimer();
@@ -96,5 +103,6 @@ namespace JungleTrouble
         {
             
         }
+
     }
 }

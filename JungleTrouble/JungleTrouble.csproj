@@ -9,16 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="background.jpg" />
-    <None Remove="Background.png" />
     <None Remove="Images\Background.png" />
     <None Remove="Images\placeholder.png" />
     <None Remove="Images\placeholder2.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="background.jpg" />
-    <Resource Include="Background.png" />
     <Resource Include="Images\Background.png" />
     <Resource Include="Images\placeholder.png" />
     <Resource Include="Images\placeholder2.png" />
