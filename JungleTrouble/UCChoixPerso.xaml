@@ -9,7 +9,18 @@
     <Grid Background="#00000000">
         <Label Content="Choisi un Personnage" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Height="37" Width="568" FontSize="20" HorizontalContentAlignment="Center"/>
         <RadioButton x:Name="rbperso1" Content="" HorizontalAlignment="Left" Margin="155,200,0,0" VerticalAlignment="Top" Height="192" Width="116" Click="rbperso1_Click"/>
-        <RadioButton x:Name="rbperso2" Content="" HorizontalAlignment="Right" Margin="0,200,155,0" VerticalAlignment="Top" Height="192" Width="118" Background="White" Click="rbperso2_Click"/>
+        <RadioButton x:Name="rbperso2" HorizontalAlignment="Right" Margin="0,200,155,0" VerticalAlignment="Top" Height="192" Width="118" Background="White" Click="rbperso2_Click">
+            <Image Height="192" Source="/Images/Perso1/perso13.png" Stretch="Fill" Width="98" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </RadioButton>
         <Button x:Name="butJouer" Content="Grimper" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="98" FontSize="20" VerticalContentAlignment="Center" Margin="0,75,0,0" IsEnabled="False"/>
         <Menu Height="20" Width="800" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <MenuItem x:Name="MenuItem" Header="_Parametre" Click="MenuItem_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>

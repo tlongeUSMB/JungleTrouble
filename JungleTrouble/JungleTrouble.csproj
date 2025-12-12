@@ -10,6 +10,9 @@
 
   <ItemGroup>
     <None Remove="Images\Background.png" />
+    <None Remove="Images\perso1statique.png" />
+    <None Remove="Images\Perso1\perso11.png" />
+    <None Remove="Images\Perso1\perso12.png" />
     <None Remove="Images\placeholder.png" />
     <None Remove="Images\placeholder2.png" />
     <None Remove="Images\placeholder3.png" />
@@ -17,6 +20,9 @@
 
   <ItemGroup>
     <Resource Include="Images\Background.png" />
+    <Resource Include="Images\Perso1\perso11.png" />
+    <Resource Include="Images\Perso1\perso12.png" />
+    <Resource Include="Images\Perso1\perso13.png" />
     <Resource Include="Images\placeholder.png" />
     <Resource Include="Images\placeholder2.png" />
     <Resource Include="Images\placeholder3.png" />

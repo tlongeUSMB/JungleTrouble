@@ -27,6 +27,7 @@ namespace JungleTrouble
         private double WHIDTHTONNEAU = 30, HEIGTHTONNEAU = 30;
         private bool verif = false;
         private string direction = "right";
+        private static BitmapImage[] persos1 = new BitmapImage[8];
         private static readonly double[,] plateformes = { { 0, 20, 0, 800}, { 107.5, 127.5, 0, 650}, { 215, 235, 150, 800}, { 322.5, 342.5, 0, 650 } };
         private static readonly Rect hitboxPlateforme0 = new Rect(0, 0, 800, 20);
         private static readonly Rect hitboxPlateforme1 = new Rect(0, 107.5, 700, 20);
@@ -36,6 +37,7 @@ namespace JungleTrouble
         {
             InitializeComponent();
             InitializeTimer();
+            InitializeImages();
 
         }
 
@@ -100,6 +102,7 @@ namespace JungleTrouble
             double objY = Canvas.GetBottom(imgPerso);
             Rect hitboxPerso = new Rect(objX, objY, WIDTHPERSO, HEIGHTPERSO);
             if (e.Key == Key.Right && Canvas.GetLeft(imgPerso) < 764)
+
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) + 5);
             if (e.Key == Key.Left && Canvas.GetLeft(imgPerso) > 0)
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) - 5);
@@ -159,7 +162,15 @@ namespace JungleTrouble
             }
 
         }
-
+        private void InitializeImages()
+        {
+            
+            for (int i = 0; i < 3; i++)
+            {
+                Uri path = new Uri($"pack://application:,,,/Images/Perso1/perso1{i + 1}.png");
+                persos1[i] = new BitmapImage(path);
+            }
+        }
 
 
 
