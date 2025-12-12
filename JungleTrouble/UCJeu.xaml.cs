@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,9 @@ namespace JungleTrouble
         private double GRAVITY = 0.98;
         private double JUMPSTRENGTH = 50;
         private double WIDTHPERSO = 18, HEIGHTPERSO = 30;
+        private double WHIDTHTONNEAU = 30, HEIGTHTONNEAU = 30;
+        private bool verif = false;
+        private string direction = "right";
         private static readonly double[,] plateformes = { { 0, 20, 0, 800}, { 107.5, 127.5, 0, 650}, { 215, 235, 150, 800}, { 322.5, 342.5, 0, 650 } };
         private static readonly Rect hitboxPlateforme0 = new Rect(0, 0, 800, 20);
         private static readonly Rect hitboxPlateforme1 = new Rect(0, 107.5, 700, 20);
@@ -50,13 +54,15 @@ namespace JungleTrouble
         }
         private void GameLoop(object sender, EventArgs e)
         {
-            Collision(imgPerso);
+            Collision(imgPerso,WIDTHPERSO,HEIGHTPERSO);
+            Collision(imgTonneau, WHIDTHTONNEAU, HEIGTHTONNEAU);
+            mouvetonneaux(2);
         }
-        private void Collision(Image obj)
+        private void Collision(Image obj,double width, double heigth)
         {
             double objX = Canvas.GetLeft(obj);
             double objY = Canvas.GetBottom(obj);
-            Rect hitboxPerso = new Rect(objX, objY, WIDTHPERSO, HEIGHTPERSO);
+            Rect hitboxPerso = new Rect(objX, objY, width, heigth);
 
             if (!hitboxPerso.IntersectsWith(hitboxPlateforme0) && !hitboxPerso.IntersectsWith(hitboxPlateforme1) && !hitboxPerso.IntersectsWith(hitboxPlateforme2) && !hitboxPerso.IntersectsWith(hitboxPlateforme3))
             {
@@ -104,6 +110,45 @@ namespace JungleTrouble
         //{
             
         //}
+
+        private void mouvetonneaux(double pxmv)
+        {
+            double objX = Canvas.GetLeft(imgTonneau);
+            double objY = Canvas.GetBottom(imgTonneau);
+            Rect hitbox = new Rect(objX, objY, WHIDTHTONNEAU, HEIGTHTONNEAU);
+            if (Canvas.GetLeft(imgTonneau) > 770)
+            {
+                if (verif == false)
+                {
+                    direction = "left";
+                }
+                verif = true;
+            }
+
+            else if (Canvas.GetLeft(imgTonneau) <= 0)
+            {
+                if (verif == false)
+                {
+                    direction = "right";
+                }
+                verif = true;
+            }
+            else
+            {
+                verif = false;
+            }
+            if (direction == "right")
+                Canvas.SetLeft(imgTonneau, Canvas.GetLeft(imgTonneau) + pxmv);
+            else if (direction == "left")
+                Canvas.SetLeft(imgTonneau, Canvas.GetLeft(imgTonneau) - pxmv);
+
+
+
+
+        }
+
+
+
 
     }
 }

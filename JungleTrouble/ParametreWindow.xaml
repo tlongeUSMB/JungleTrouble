@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JungleTrouble"
         mc:Ignorable="d"
-        Title="ParametreWindow" Height="400" Width="300">
+        Title="ParametreWindow" Height="450" Width="300">
     <Grid>
         <Label Content="Son :" HorizontalAlignment="Left" Margin="25,23,0,0" VerticalAlignment="Top" Width="217" Height="25" FontSize="14"/>
         <Label Content="vitesse des tonneaux :&#xD;&#xA;" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="265" Height="25" FontSize="14"/>

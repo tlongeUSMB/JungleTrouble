@@ -12,12 +12,14 @@
     <None Remove="Images\Background.png" />
     <None Remove="Images\placeholder.png" />
     <None Remove="Images\placeholder2.png" />
+    <None Remove="Images\placeholder3.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\Background.png" />
     <Resource Include="Images\placeholder.png" />
     <Resource Include="Images\placeholder2.png" />
+    <Resource Include="Images\placeholder3.png" />
   </ItemGroup>
 
 </Project>

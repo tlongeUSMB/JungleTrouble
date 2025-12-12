@@ -15,11 +15,13 @@
             <MenuItem x:Name="MenuItem" Header="_Parametre" Click="MenuItem_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         </Menu>
         <Canvas Grid.Row="1">
-        <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="0" Width="800"/>
-        <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="107.5" Width="700"/>
-        <Image Height="20" Canvas.Left="100" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="215" Width="700"/>
-        <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="322.5" Width="700"/>
-        <Image x:Name="imgPerso"  Height="30" Canvas.Left="251" Source="/Images/placeholder2.png" Stretch="Fill" Canvas.Bottom="400" Width="18"/>
-    </Canvas>
+            <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="0" Width="800"/>
+            <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="107.5" Width="700"/>
+            <Image Height="20" Canvas.Left="100" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="215" Width="700"/>
+            <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="322.5" Width="700"/>
+            <Image x:Name="imgPerso"  Height="30" Canvas.Left="251" Source="/Images/placeholder2.png" Stretch="Fill" Canvas.Bottom="400" Width="18"/>
+            <Image x:Name="imgTonneau" Height="30" Canvas.Left="15" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="400" Width="30"/>
+
+        </Canvas>
     </Grid>
 </UserControl>
