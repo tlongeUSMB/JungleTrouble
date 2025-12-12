@@ -22,8 +22,8 @@ namespace JungleTrouble
     {
         private DispatcherTimer minuterie;
         private double GRAVITY = 0.98;
-        private double JUMPSTRENGTH = 50;
-        private double WIDTHPERSO = 18, HEIGHTPERSO = 30;
+        private double JUMPSTRENGTH = 25;
+        private double WIDTHPERSO = 24, HEIGHTPERSO = 40;
         private double WHIDTHTONNEAU = 30, HEIGTHTONNEAU = 30;
         private bool verif = false;
         private string direction = "right";
@@ -33,11 +33,15 @@ namespace JungleTrouble
         private static readonly Rect hitboxPlateforme1 = new Rect(0, 107.5, 700, 20);
         private static readonly Rect hitboxPlateforme2 = new Rect(100, 215, 700, 20);
         private static readonly Rect hitboxPlateforme3 = new Rect(0, 322.5, 700, 20);
+
         public UCJeu()
         {
+            
             InitializeComponent();
             InitializeTimer();
             InitializeImages();
+            string nomFichierImage = $"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}1.png";
+            imgPerso.Source = new BitmapImage(new Uri(nomFichierImage));
 
         }
 
@@ -46,6 +50,7 @@ namespace JungleTrouble
             ParametreWindow parametreWindow = new ParametreWindow();
             bool? rep = parametreWindow.ShowDialog();
         }
+        
 
         private void InitializeTimer()
         {
@@ -94,25 +99,28 @@ namespace JungleTrouble
             Application.Current.MainWindow.KeyDown += canvasJeu_KeyDown;
         }
 
-      
 
+        private int count = 0;
+        private int countimage = 0;
         private void canvasJeu_KeyDown(object sender, KeyEventArgs e)
         {
             double objX = Canvas.GetLeft(imgPerso);
             double objY = Canvas.GetBottom(imgPerso);
             Rect hitboxPerso = new Rect(objX, objY, WIDTHPERSO, HEIGHTPERSO);
             if (e.Key == Key.Right && Canvas.GetLeft(imgPerso) < 764)
-
+            {
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) + 5);
+            }
             if (e.Key == Key.Left && Canvas.GetLeft(imgPerso) > 0)
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) - 5);
             if (e.Key == Key.Up && (hitboxPerso.IntersectsWith(hitboxPlateforme0) || hitboxPerso.IntersectsWith(hitboxPlateforme1) || hitboxPerso.IntersectsWith(hitboxPlateforme2) || hitboxPerso.IntersectsWith(hitboxPlateforme3)))
                 Canvas.SetBottom(imgPerso, objY + JUMPSTRENGTH);
+
         }
 
         //private void Saut(Rect hitboxPerso)
         //{
-            
+
         //}
 
         private void mouvetonneaux(double pxmv)
@@ -128,6 +136,8 @@ namespace JungleTrouble
 
             else if (Canvas.GetLeft(imgTonneau) <= 0)
             {
+                if (Canvas.GetBottom(imgTonneau) == 20)
+                    Canvas.SetBottom(imgTonneau, 400);
                 if (verif == false)
                 {
                     direction = "right";
@@ -165,7 +175,7 @@ namespace JungleTrouble
         private void InitializeImages()
         {
             
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
             {
                 Uri path = new Uri($"pack://application:,,,/Images/Perso1/perso1{i + 1}.png");
                 persos1[i] = new BitmapImage(path);

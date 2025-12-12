@@ -28,10 +28,12 @@ namespace JungleTrouble
         private void rbperso1_Click(object sender, RoutedEventArgs e)
         {
             butJouer.IsEnabled = true;
+            MainWindow.Perso = "2";
         }
         private void rbperso2_Click(object sender, RoutedEventArgs e)
         {
             butJouer.IsEnabled = true;
+            MainWindow.Perso = "1";
         }
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
