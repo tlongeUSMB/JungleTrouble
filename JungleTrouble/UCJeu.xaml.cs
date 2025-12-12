@@ -57,6 +57,7 @@ namespace JungleTrouble
             Collision(imgPerso,WIDTHPERSO,HEIGHTPERSO);
             Collision(imgTonneau, WHIDTHTONNEAU, HEIGTHTONNEAU);
             mouvetonneaux(2);
+            colisionTonneau();
         }
         private void Collision(Image obj,double width, double heigth)
         {
@@ -113,9 +114,6 @@ namespace JungleTrouble
 
         private void mouvetonneaux(double pxmv)
         {
-            double objX = Canvas.GetLeft(imgTonneau);
-            double objY = Canvas.GetBottom(imgTonneau);
-            Rect hitbox = new Rect(objX, objY, WHIDTHTONNEAU, HEIGTHTONNEAU);
             if (Canvas.GetLeft(imgTonneau) > 770)
             {
                 if (verif == false)
@@ -142,8 +140,23 @@ namespace JungleTrouble
             else if (direction == "left")
                 Canvas.SetLeft(imgTonneau, Canvas.GetLeft(imgTonneau) - pxmv);
 
+        }
 
 
+        private void colisionTonneau()
+        {
+
+            double objX = Canvas.GetLeft(imgTonneau);
+            double objY = Canvas.GetBottom(imgTonneau);
+            Rect hitboxtonneau = new Rect(objX, objY, WHIDTHTONNEAU, HEIGTHTONNEAU);
+            double objV = Canvas.GetLeft(imgPerso);
+            double objW = Canvas.GetBottom(imgPerso);
+            Rect hitboxPerso = new Rect(objV, objW, WIDTHPERSO, HEIGHTPERSO);
+            if(hitboxPerso.IntersectsWith(hitboxtonneau))
+            {
+                Canvas.SetLeft(imgPerso, 0);
+                Canvas.SetBottom(imgPerso, 0);
+            }
 
         }
 
