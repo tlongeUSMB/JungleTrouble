@@ -15,12 +15,15 @@
             <MenuItem x:Name="MenuItem" Header="_Parametre" Click="MenuItem_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         </Menu>
         <Canvas Grid.Row="1">
-            <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="0" Width="800"/>
-            <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="107.5" Width="700"/>
-            <Image Height="20" Canvas.Left="100" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="215" Width="700"/>
-            <Image Height="20" Canvas.Left="0" Source="/Images/placeholder.png" Stretch="Fill" Canvas.Bottom="322.5" Width="700"/>
+            <Image Height="20" Canvas.Left="0" Source="/Images/plank.png" Stretch="Fill" Canvas.Bottom="0" Width="800"/>
+            <Image Height="20" Canvas.Left="0" Source="/Images/plank.png" Stretch="Fill" Canvas.Bottom="107.5" Width="700"/>
+            <Image Height="20" Canvas.Left="100" Source="/Images/plank.png" Stretch="Fill" Canvas.Bottom="215" Width="700"/>
+            <Image Height="20" Canvas.Left="0" Source="/Images/plank.png" Stretch="Fill" Canvas.Bottom="322.5" Width="700"/>
             <Image x:Name="imgPerso"  Height="40" Canvas.Left="251" Source="/Images/Perso1/perso11.png" Stretch="Fill" Canvas.Bottom="400" Width="24"/>
             <Image x:Name="imgTonneau" Height="30" Canvas.Left="15" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="400" Width="30"/>
+            <Image Height="195" Canvas.Left="720" Source="/Images/ladder.png" Stretch="Fill" Width="70" Canvas.Bottom="20" VerticalAlignment="Bottom"/>
+            <Image Height="195" Canvas.Left="720" Source="/Images/ladder.png" Stretch="Fill" Width="70" Canvas.Bottom="235" VerticalAlignment="Bottom"/>
+            <Image Height="195" Canvas.Left="10" Source="/Images/ladder.png" Stretch="Fill" Width="70" Canvas.Bottom="127.5" VerticalAlignment="Bottom"/>
 
         </Canvas>
     </Grid>
