@@ -12,8 +12,6 @@
     <None Remove="Images\ladder.png" />
     <None Remove="Images\perso1statique.png" />
     <None Remove="Images\Perso1\perso1grimpe1.png" />
-    <None Remove="Images\Perso1\perso1sautD.png" />
-    <None Remove="Images\Perso1\perso1sautG.png" />
     <None Remove="Images\placeholder3.png" />
     <None Remove="Images\plank.png" />
   </ItemGroup>
@@ -21,12 +19,10 @@
   <ItemGroup>
     <Resource Include="Images\Background.png" />
     <Resource Include="Images\ladder.png" />
-    <Resource Include="Images\Perso1\perso13.png" />
-    <Resource Include="Images\Perso1\perso11.png" />
     <Resource Include="Images\Perso1\perso12.png" />
+    <Resource Include="Images\Perso1\perso11.png" />
     <Resource Include="Images\Perso1\perso1grimpe1.png" />
-    <Resource Include="Images\Perso1\perso1sautD.png" />
-    <Resource Include="Images\Perso1\perso1sautG.png" />
+    <Resource Include="Images\Perso1\perso1saut.png" />
     <Resource Include="Images\Perso2\perso21.png" />
     <Resource Include="Images\placeholder3.png" />
     <Resource Include="Images\plank.png" />

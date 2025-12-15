@@ -44,7 +44,8 @@ namespace JungleTrouble
         private bool tonneauAuSol = false;
         private bool estSurEchelle = false;
         private double vitesseGrimpe = 200;
-        private BitmapImage[] perso = new BitmapImage[3];
+        private BitmapImage[] persoMarche = new BitmapImage[2];
+        private int pas = 0;
 
         public UCJeu()
         {
@@ -85,18 +86,13 @@ namespace JungleTrouble
             estSurEchelle = VerifierEchelle();
             if (!estSurEchelle)
             {
-                AppliquerPhysique(
-                    imgPerso,
-                    WIDTHPERSO,
-                    HEIGHTPERSO,
-                    ref vitesseVerticalePerso,
-                    ref persoAuSol,
-                    deltaTime);
+                AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
             }
             else
             {
                 vitesseVerticalePerso = 0;
-            }
+                imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe1.png"));
+            }   
         }
         private double HauteurPlateformeSousPerso(Image obj, double largeur, double hauteur, double yPrecedent)
         {
@@ -120,8 +116,7 @@ namespace JungleTrouble
             double x = Canvas.GetLeft(obj);
             double y = Canvas.GetBottom(obj);
             Rect hitbox = new Rect(x, y, width, height);
-
-            return hitbox.IntersectsWith(hitboxPlateforme0)|| hitbox.IntersectsWith(hitboxPlateforme1) || hitbox.IntersectsWith(hitboxPlateforme2) || hitbox.IntersectsWith(hitboxPlateforme3);
+            return hitbox.IntersectsWith(hitboxPlateforme0) || hitbox.IntersectsWith(hitboxPlateforme1) || hitbox.IntersectsWith(hitboxPlateforme2) || hitbox.IntersectsWith(hitboxPlateforme3);
         }
 
         private void AppliquerPhysique(Image obj,double largeur,double hauteur,ref double vitesseVerticale,ref bool estAuSol,double deltaTime)
@@ -154,27 +149,45 @@ namespace JungleTrouble
         private int countimage = 0;
         private void canvasJeu_KeyDown(object sender, KeyEventArgs e)
         {
-            int pas = 1;
             double objX = Canvas.GetLeft(imgPerso);
             double objY = Canvas.GetBottom(imgPerso);
             Rect hitboxPerso = new Rect(objX, objY, WIDTHPERSO, HEIGHTPERSO);
             if (e.Key == Key.Right && Canvas.GetLeft(imgPerso) < 764)
             {
                 pas++;
-                Console.WriteLine(pas);
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) + 5);
-                imgPerso.Source = perso[(pas%3) + 1];
+                imgPerso.RenderTransform = new ScaleTransform(1, 1, imgPerso.Width / 2, imgPerso.Height / 2);
+                if (pas % 4 <= 1 && pas % 4 >= 0)
+                {
+                    imgPerso.Source = persoMarche[0];
+                }
+                else
+                {
+                    imgPerso.Source = persoMarche[1];
+                }
             }
             if (e.Key == Key.Left && Canvas.GetLeft(imgPerso) > 0)
+            {
+                pas++;
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) - 5);
+                imgPerso.RenderTransform = new ScaleTransform(-1, 1, imgPerso.Width / 2, imgPerso.Height / 2);
+                if (pas % 4 <= 1 && pas % 4 >= 0)
+                {
+                    imgPerso.Source = persoMarche[0];
+                }
+                else
+                {
+                    imgPerso.Source = persoMarche[1];
+                }
+            }
             if (e.Key == Key.Up)
             {
-                    Saut();
+                Saut();
             }
             if (estSurEchelle)
             {
                 double y = Canvas.GetBottom(imgPerso);
-                if (e.Key == Key.Up)
+                if (e.Key == Key.Up && !hitboxPerso.IntersectsWith(hitboxPlateforme1) && !hitboxPerso.IntersectsWith(hitboxPlateforme2) && !hitboxPerso.IntersectsWith(hitboxPlateforme3))
                 {
                     y += vitesseGrimpe * 0.016;
                     Canvas.SetBottom(imgPerso, y);
@@ -187,10 +200,19 @@ namespace JungleTrouble
             }
         }
 
+        private void canvasJeu_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Right || e.Key == Key.Left)
+            {
+                imgPerso.Source = persoMarche[0];
+            }
+        }
+
         private void Saut()
         {
             if (persoAuSol)
             {
+                imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}saut.png"));
                 vitesseVerticalePerso = JUMPSTRENGTH;
                 persoAuSol = false;
             }
@@ -247,12 +269,12 @@ namespace JungleTrouble
         }
         private void InitializeImages()
         {
-            for (int i = 0; i < perso.Length; i++)
+            for (int i = 0; i < persoMarche.Length; i++)
             {
-                perso[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso + (i + 1)}.png"));
-                Console.WriteLine("Image " + i + " " + perso[i]);
+                persoMarche[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso + (i + 1)}.png"));
+                Console.WriteLine("Image " + i + " " + persoMarche[i]);
             }
-            Console.WriteLine(perso);
+            Console.WriteLine(persoMarche);
         }
 
         private bool VerifierEchelle()
@@ -260,10 +282,7 @@ namespace JungleTrouble
             double x = Canvas.GetLeft(imgPerso);
             double y = Canvas.GetBottom(imgPerso);
             Rect hitboxPerso = new Rect(x, y, WIDTHPERSO, HEIGHTPERSO);
-
-            return hitboxPerso.IntersectsWith(hitboxLadder1) ||
-                   hitboxPerso.IntersectsWith(hitboxLadder2) ||
-                   hitboxPerso.IntersectsWith(hitboxLadder3);
+            return hitboxPerso.IntersectsWith(hitboxLadder1) || hitboxPerso.IntersectsWith(hitboxLadder2) || hitboxPerso.IntersectsWith(hitboxLadder3);
         }
 
     }
