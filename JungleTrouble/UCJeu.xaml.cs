@@ -46,6 +46,8 @@ namespace JungleTrouble
         private double vitesseGrimpe = 200;
         private BitmapImage[] persoMarche = new BitmapImage[2];
         private int pas = 0;
+        private double nbTonneaux = 1;
+        private double vitesseTonneaux = 2;
 
         public UCJeu()
         {
@@ -59,6 +61,9 @@ namespace JungleTrouble
         {
             ParametreWindow parametreWindow = new ParametreWindow();
             bool? rep = parametreWindow.ShowDialog();
+            nbTonneaux = parametreWindow.Slidnombre.Value;
+            vitesseTonneaux = parametreWindow.Slidvitesse.Value;
+            Console.WriteLine("Nombre de tonneaux : " + nbTonneaux);
         }
         
 
@@ -74,14 +79,14 @@ namespace JungleTrouble
         {
             EstSurPlateforme(imgPerso,WIDTHPERSO,HEIGHTPERSO);
             EstSurPlateforme(imgTonneau1, WHIDTHTONNEAU, HEIGTHTONNEAU);
-            MoveTonneaux(2);
+            MoveTonneaux(vitesseTonneaux);
             colisionTonneau();
             DateTime tempsActuel = DateTime.Now;
             double deltaTime = (tempsActuel - tempsPrecedent).TotalSeconds;
             tempsPrecedent = tempsActuel;
             AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
             AppliquerPhysique(imgTonneau1,WHIDTHTONNEAU,HEIGTHTONNEAU,ref vitesseVerticaleTonneau,ref tonneauAuSol,deltaTime);
-            MoveTonneaux(2);
+            MoveTonneaux(vitesseTonneaux);
             colisionTonneau();
             estSurEchelle = VerifierEchelle();
             if (!estSurEchelle)
@@ -92,7 +97,7 @@ namespace JungleTrouble
             {
                 vitesseVerticalePerso = 0;
                 imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe1.png"));
-            }   
+            }
         }
         private double HauteurPlateformeSousPerso(Image obj, double largeur, double hauteur, double yPrecedent)
         {
@@ -108,7 +113,6 @@ namespace JungleTrouble
                 hauteurSol = plateformes[2, 1];
             if (hitbox.IntersectsWith(hitboxPlateforme3) && yPrecedent >= plateformes[3, 1])
                 hauteurSol = plateformes[3, 1];
-
             return hauteurSol;
         }
         private bool EstSurPlateforme(Image obj, double width, double height)

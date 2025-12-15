@@ -14,11 +14,9 @@ using System.Windows.Shapes;
 
 namespace JungleTrouble
 {
-    /// <summary>
-    /// Logique d'interaction pour ParametreWindow.xaml
-    /// </summary>
     public partial class ParametreWindow : Window
     {
+        public double nbTonneaux = 1;
         public ParametreWindow()
         {
             InitializeComponent();
