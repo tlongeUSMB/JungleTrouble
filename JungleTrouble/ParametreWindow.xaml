@@ -11,8 +11,8 @@
         <Label Content="Vitesse des tonneaux :&#xD;&#xA;" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="265" Height="25" FontSize="14"/>
         <Label Content="Nombre de tonneaux :" HorizontalAlignment="Left" Margin="25,250,0,0" VerticalAlignment="Top" Width="265" Height="25"/>
         <Slider x:Name="SlisSon" HorizontalAlignment="Center" Margin="0,66,0,0" VerticalAlignment="Top" Width="120"/>
-        <Slider x:Name="Slidvitesse" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Width="120"/>
-        <Slider x:Name="Slidnombre" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.504,0.599"/>
+        <Slider x:Name="Slidvitesse" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Width="120" Minimum="1" Maximum="5" TickFrequency="1" Value="1"/>
+        <Slider x:Name="Slidnombre" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.504,0.599" Minimum="1" Maximum="3" TickFrequency="1" Value="1"/>
         <Label Content="Jeu :" HorizontalAlignment="Left" Margin="25,110,0,0" VerticalAlignment="Top" Height="50" Width="265" FontSize="20"/>
         <Button x:Name="butclause" Content="X  " HorizontalAlignment="Right" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Height="25" Width="25" Click="butclause_Click"/>
         <Button x:Name="butOk" Content="OK" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" Height="34" Width="90" Click="butOk_Click"/>

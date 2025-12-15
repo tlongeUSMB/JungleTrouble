@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Security;
 using System.Text;
@@ -42,7 +43,8 @@ namespace JungleTrouble
         private bool persoAuSol = false;
         private bool tonneauAuSol = false;
         private bool estSurEchelle = false;
-        private double vitesseGrimpe = 100;
+        private double vitesseGrimpe = 200;
+        private BitmapImage[] perso = new BitmapImage[3];
 
         public UCJeu()
         {
@@ -50,9 +52,6 @@ namespace JungleTrouble
             InitializeComponent();
             InitializeTimer();
             InitializeImages();
-            string nomFichierImage = $"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}1.png";
-            imgPerso.Source = new BitmapImage(new Uri(nomFichierImage));
-
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -73,14 +72,14 @@ namespace JungleTrouble
         private void GameLoop(object sender, EventArgs e)
         {
             EstSurPlateforme(imgPerso,WIDTHPERSO,HEIGHTPERSO);
-            EstSurPlateforme(imgTonneau, WHIDTHTONNEAU, HEIGTHTONNEAU);
+            EstSurPlateforme(imgTonneau1, WHIDTHTONNEAU, HEIGTHTONNEAU);
             MoveTonneaux(2);
             colisionTonneau();
             DateTime tempsActuel = DateTime.Now;
             double deltaTime = (tempsActuel - tempsPrecedent).TotalSeconds;
             tempsPrecedent = tempsActuel;
             AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
-            AppliquerPhysique(imgTonneau,WHIDTHTONNEAU,HEIGTHTONNEAU,ref vitesseVerticaleTonneau,ref tonneauAuSol,deltaTime);
+            AppliquerPhysique(imgTonneau1,WHIDTHTONNEAU,HEIGTHTONNEAU,ref vitesseVerticaleTonneau,ref tonneauAuSol,deltaTime);
             MoveTonneaux(2);
             colisionTonneau();
             estSurEchelle = VerifierEchelle();
@@ -155,12 +154,16 @@ namespace JungleTrouble
         private int countimage = 0;
         private void canvasJeu_KeyDown(object sender, KeyEventArgs e)
         {
+            int pas = 1;
             double objX = Canvas.GetLeft(imgPerso);
             double objY = Canvas.GetBottom(imgPerso);
             Rect hitboxPerso = new Rect(objX, objY, WIDTHPERSO, HEIGHTPERSO);
             if (e.Key == Key.Right && Canvas.GetLeft(imgPerso) < 764)
             {
+                pas++;
+                Console.WriteLine(pas);
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) + 5);
+                imgPerso.Source = perso[pas];
             }
             if (e.Key == Key.Left && Canvas.GetLeft(imgPerso) > 0)
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) - 5);
@@ -195,7 +198,7 @@ namespace JungleTrouble
 
         private void MoveTonneaux(double pxmv)
         {
-            if (Canvas.GetLeft(imgTonneau) > 770)
+            if (Canvas.GetLeft(imgTonneau1) > 770)
             {
                 if (verif == false)
                 {
@@ -204,10 +207,10 @@ namespace JungleTrouble
                 verif = true;
             }
 
-            else if (Canvas.GetLeft(imgTonneau) <= 0)
+            else if (Canvas.GetLeft(imgTonneau1) <= 0)
             {
-                if (Canvas.GetBottom(imgTonneau) == 20)
-                    Canvas.SetBottom(imgTonneau, 400);
+                if (Canvas.GetBottom(imgTonneau1) == 20)
+                    Canvas.SetBottom(imgTonneau1, 400);
                 if (verif == false)
                 {
                     direction = "right";
@@ -219,9 +222,9 @@ namespace JungleTrouble
                 verif = false;
             }
             if (direction == "right")
-                Canvas.SetLeft(imgTonneau, Canvas.GetLeft(imgTonneau) + pxmv);
+                Canvas.SetLeft(imgTonneau1, Canvas.GetLeft(imgTonneau1) + pxmv);
             else if (direction == "left")
-                Canvas.SetLeft(imgTonneau, Canvas.GetLeft(imgTonneau) - pxmv);
+                Canvas.SetLeft(imgTonneau1, Canvas.GetLeft(imgTonneau1) - pxmv);
 
         }
 
@@ -229,8 +232,8 @@ namespace JungleTrouble
         private void colisionTonneau()
         {
 
-            double objX = Canvas.GetLeft(imgTonneau);
-            double objY = Canvas.GetBottom(imgTonneau);
+            double objX = Canvas.GetLeft(imgTonneau1);
+            double objY = Canvas.GetBottom(imgTonneau1);
             Rect hitboxtonneau = new Rect(objX, objY, WHIDTHTONNEAU, HEIGTHTONNEAU);
             double objV = Canvas.GetLeft(imgPerso);
             double objW = Canvas.GetBottom(imgPerso);
@@ -244,12 +247,12 @@ namespace JungleTrouble
         }
         private void InitializeImages()
         {
-            
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < perso.Length; i++)
             {
-                Uri path = new Uri($"pack://application:,,,/Images/Perso1/perso1{i + 1}.png");
-                persos1[i] = new BitmapImage(path);
+                perso[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso + (i + 1)}.png"));
+                Console.WriteLine("Image " + i + " " + perso[i]);
             }
+            Console.WriteLine(perso);
         }
 
         private bool VerifierEchelle()

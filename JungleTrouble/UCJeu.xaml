@@ -24,7 +24,9 @@
                 <Image Height="195" Canvas.Left="720" Source="/Images/ladder.png" Stretch="Fill" Width="70" Canvas.Bottom="235" VerticalAlignment="Bottom"/>
                 <Image Height="195" Canvas.Left="10" Source="/Images/ladder.png" Stretch="Fill" Width="70" Canvas.Bottom="127.5" VerticalAlignment="Bottom"/>
                 <Image x:Name="imgPerso"  Height="40" Canvas.Left="10" Source="/Images/Perso1/perso11.png" Stretch="Fill" Canvas.Bottom="20" Width="24"/>
-                <Image x:Name="imgTonneau" Height="30" Canvas.Left="15" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="400" Width="30"/>
+                <Image x:Name="imgTonneau1" Height="30" Canvas.Left="15" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="400" Width="30"/>
+                <Image x:Name="imgTonneau2" Height="30" Canvas.Left="15" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="400" Width="30" />
+                <Image x:Name="imgTonneau3" Height="30" Canvas.Left="15" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="400" Width="30"/>
             </Canvas>
         </Grid>
     </Viewbox>
