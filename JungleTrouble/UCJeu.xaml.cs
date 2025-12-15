@@ -163,7 +163,7 @@ namespace JungleTrouble
                 pas++;
                 Console.WriteLine(pas);
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) + 5);
-                imgPerso.Source = perso[pas];
+                imgPerso.Source = perso[(pas%3) + 1];
             }
             if (e.Key == Key.Left && Canvas.GetLeft(imgPerso) > 0)
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) - 5);
