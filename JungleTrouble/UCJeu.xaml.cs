@@ -27,7 +27,7 @@ namespace JungleTrouble
         private double WIDTHPERSO = 24, HEIGHTPERSO = 40;
         private double WHIDTHTONNEAU = 30, HEIGTHTONNEAU = 30;
         private bool verif = false;
-        private string direction = "right";
+        private string[] direction = { "right", "right", "right" };
         private static BitmapImage[] persos1 = new BitmapImage[8];
         private static readonly double[,] plateformes = { { 0, 20, 0, 800}, { 107.5, 127.5, 0, 650}, { 215, 235, 150, 800}, { 322.5, 342.5, 0, 650 } };
         private static readonly Rect hitboxPlateforme0 = new Rect(0, 0, 800, 20);
@@ -39,15 +39,16 @@ namespace JungleTrouble
         private static readonly Rect hitboxLadder3 = new Rect(720, 235, 70, 195);
         private DateTime tempsPrecedent;
         private double vitesseVerticalePerso = 0.0;
-        private double vitesseVerticaleTonneau = 0.0;
+        private double[] vitesseVerticaleTonneau = { 0.0, 0.0, 0.0 };
         private bool persoAuSol = false;
-        private bool tonneauAuSol = false;
+        private bool[] tonneauAuSol = { false, false, false };
         private bool estSurEchelle = false;
         private double vitesseGrimpe = 200;
         private BitmapImage[] persoMarche = new BitmapImage[2];
         private int pas = 0;
         private double nbTonneaux = 1;
         private double vitesseTonneaux = 2;
+        private Image[] imgTonneau = new Image[3];
 
         public UCJeu()
         {
@@ -78,14 +79,27 @@ namespace JungleTrouble
         private void GameLoop(object sender, EventArgs e)
         {
             EstSurPlateforme(imgPerso,WIDTHPERSO,HEIGHTPERSO);
-            EstSurPlateforme(imgTonneau1, WHIDTHTONNEAU, HEIGTHTONNEAU);
+            for (int i = 0; i < nbTonneaux; i++)
+                tonneauAuSol[i] = EstSurPlateforme(imgTonneau[i], WHIDTHTONNEAU, HEIGTHTONNEAU);
             MoveTonneaux(vitesseTonneaux);
             colisionTonneau();
             DateTime tempsActuel = DateTime.Now;
             double deltaTime = (tempsActuel - tempsPrecedent).TotalSeconds;
             tempsPrecedent = tempsActuel;
             AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
-            AppliquerPhysique(imgTonneau1,WHIDTHTONNEAU,HEIGTHTONNEAU,ref vitesseVerticaleTonneau,ref tonneauAuSol,deltaTime);
+            AppliquerPhysique(imgTonneau[0],WHIDTHTONNEAU,HEIGTHTONNEAU,ref vitesseVerticaleTonneau[0],ref tonneauAuSol[0],deltaTime);
+            if (nbTonneaux == 2)
+            {
+                AppliquerPhysique(imgTonneau[1], WHIDTHTONNEAU, HEIGTHTONNEAU, ref vitesseVerticaleTonneau[1], ref tonneauAuSol[1], deltaTime);
+                imgTonneau2.Visibility = Visibility.Visible;
+            }
+            else if (nbTonneaux == 3)
+            {
+                AppliquerPhysique(imgTonneau[1], WHIDTHTONNEAU, HEIGTHTONNEAU, ref vitesseVerticaleTonneau[1], ref tonneauAuSol[1], deltaTime);
+                AppliquerPhysique(imgTonneau[2], WHIDTHTONNEAU, HEIGTHTONNEAU, ref vitesseVerticaleTonneau[2], ref tonneauAuSol[2], deltaTime);
+                imgTonneau2.Visibility = Visibility.Visible;
+                imgTonneau3.Visibility = Visibility.Visible;
+            }
             MoveTonneaux(vitesseTonneaux);
             colisionTonneau();
             estSurEchelle = VerifierEchelle();
@@ -224,50 +238,55 @@ namespace JungleTrouble
 
         private void MoveTonneaux(double pxmv)
         {
-            if (Canvas.GetLeft(imgTonneau1) > 770)
+            for (int i = 0; i < nbTonneaux; i++)
             {
-                if (verif == false)
+                if (Canvas.GetLeft(imgTonneau[i]) > 770)
                 {
-                    direction = "left";
+                    if (verif == false)
+                    {
+                        direction[i] = "left";
+                    }
+                    verif = true;
                 }
-                verif = true;
-            }
 
-            else if (Canvas.GetLeft(imgTonneau1) <= 0)
-            {
-                if (Canvas.GetBottom(imgTonneau1) == 20)
-                    Canvas.SetBottom(imgTonneau1, 400);
-                if (verif == false)
+                else if (Canvas.GetLeft(imgTonneau[i]) <= 0)
                 {
-                    direction = "right";
+                    if (Canvas.GetBottom(imgTonneau[i]) == 20)
+                        Canvas.SetBottom(imgTonneau[i], 400);
+                    if (verif == false)
+                    {
+                        direction[i] = "right";
+                    }
+                    verif = true;
                 }
-                verif = true;
-            }
-            else
-            {
-                verif = false;
-            }
-            if (direction == "right")
-                Canvas.SetLeft(imgTonneau1, Canvas.GetLeft(imgTonneau1) + pxmv);
-            else if (direction == "left")
-                Canvas.SetLeft(imgTonneau1, Canvas.GetLeft(imgTonneau1) - pxmv);
+                else
+                {
+                    verif = false;
+                }
 
+                if (direction[i] == "right")
+                    Canvas.SetLeft(imgTonneau[i], Canvas.GetLeft(imgTonneau[i]) + pxmv);
+                else if (direction[i] == "left")
+                    Canvas.SetLeft(imgTonneau[i], Canvas.GetLeft(imgTonneau[i]) - pxmv);
+            }
         }
 
 
         private void colisionTonneau()
         {
-
-            double objX = Canvas.GetLeft(imgTonneau1);
-            double objY = Canvas.GetBottom(imgTonneau1);
-            Rect hitboxtonneau = new Rect(objX, objY, WHIDTHTONNEAU, HEIGTHTONNEAU);
-            double objV = Canvas.GetLeft(imgPerso);
-            double objW = Canvas.GetBottom(imgPerso);
-            Rect hitboxPerso = new Rect(objV, objW, WIDTHPERSO, HEIGHTPERSO);
-            if(hitboxPerso.IntersectsWith(hitboxtonneau))
+            for (int i = 0; i < nbTonneaux; i++)
             {
-                Canvas.SetLeft(imgPerso, 0);
-                Canvas.SetBottom(imgPerso, 20);
+                double X = Canvas.GetLeft(imgTonneau[i]);
+                double Y = Canvas.GetBottom(imgTonneau[i]);
+                Rect hitboxtonneau = new Rect(X, Y, WHIDTHTONNEAU, HEIGTHTONNEAU);
+                double objV = Canvas.GetLeft(imgPerso);
+                double objW = Canvas.GetBottom(imgPerso);
+                Rect hitboxPerso = new Rect(objV, objW, WIDTHPERSO, HEIGHTPERSO);
+                if (hitboxPerso.IntersectsWith(hitboxtonneau))
+                {
+                    Canvas.SetLeft(imgPerso, 0);
+                    Canvas.SetBottom(imgPerso, 20);
+                }
             }
 
         }
@@ -279,6 +298,11 @@ namespace JungleTrouble
                 Console.WriteLine("Image " + i + " " + persoMarche[i]);
             }
             Console.WriteLine(persoMarche);
+            imgTonneau[0] = imgTonneau1;
+            imgTonneau[1] = imgTonneau2;
+            imgTonneau[2] = imgTonneau3;
+            imgTonneau2.Visibility = Visibility.Hidden;
+            imgTonneau3.Visibility = Visibility.Hidden;
         }
 
         private bool VerifierEchelle()
