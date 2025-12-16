@@ -56,13 +56,26 @@ namespace JungleTrouble
         public bool win = false;
         private int minuteri = 0;
         private bool testg = true;
+        private bool[] tonneauEnLancement = { false, false, false };
+        private bool[] tonneauDeploye = { true, false, false };
+        private DispatcherTimer gorilleTimer;
+        private int gorilleFrame = 0;
+        private bool gorilleEnAnimation = false;
+        private double delaiLancement = 0;
 
         public UCJeu()
         {
             InitializeComponent();
             InitializeTimer();
             InitializeImages();
-            animegorille();
+            InitializeGorilleAnimation();
+        }
+
+        private void InitializeGorilleAnimation()
+        {
+            gorilleTimer = new DispatcherTimer();
+            gorilleTimer.Interval = TimeSpan.FromMilliseconds(150);
+            gorilleTimer.Tick += GorilleAnimationTick;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -92,10 +105,17 @@ namespace JungleTrouble
             colisionTonneau();
             DateTime tempsActuel = DateTime.Now;
             double deltaTime = (tempsActuel - tempsPrecedent).TotalSeconds;
+            delaiLancement += deltaTime;
+
+            if (delaiLancement >= 1.0)
+            {
+                LancementTonneau();
+                delaiLancement = 0;
+            }
             tempsPrecedent = tempsActuel;
             AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
             AppliquerPhysique(imgTonneau[0],WHIDTHTONNEAU,HEIGTHTONNEAU,ref vitesseVerticaleTonneau[0],ref tonneauAuSol[0],deltaTime);
-            CompteTonneaux(deltaTime);
+            AfficheTonneaux(deltaTime);
             MoveTonneaux(vitesseTonneaux);
             colisionTonneau();
             win = WinCheck();
@@ -155,7 +175,7 @@ namespace JungleTrouble
             ((MainWindow)Application.Current.MainWindow).AfficheDemarrage();
         }
 
-        private void CompteTonneaux(double deltaTime)
+        private void AfficheTonneaux(double deltaTime)
         {
             if (nbTonneaux == 1)
             {
@@ -350,6 +370,10 @@ namespace JungleTrouble
         {
             for (int i = 0; i < nbTonneaux; i++)
             {
+                if (tonneauEnLancement[i] && Canvas.GetLeft(imgTonneau[i]) != 30)
+                {
+                    tonneauEnLancement[i] = false;
+                }
                 if (Canvas.GetLeft(imgTonneau[i])==30 && Canvas.GetBottom(imgTonneau[i])==415)
                     direction[i] = "right";
                 if (Canvas.GetLeft(imgTonneau[i]) > 770)
@@ -396,8 +420,7 @@ namespace JungleTrouble
                 Rect hitboxPerso = new Rect(objV, objW, WIDTHPERSO, HEIGHTPERSO);
                 if (hitboxPerso.IntersectsWith(hitboxtonneau))
                 {
-                    Canvas.SetLeft(imgTonneau[i], 30);
-                    Canvas.SetBottom(imgTonneau[i], 415);
+                    LancerTonneau(i);  
                     Canvas.SetLeft(imgPerso, 0);
                     Canvas.SetBottom(imgPerso, 20);
                     vies--;
@@ -431,27 +454,50 @@ namespace JungleTrouble
             return hitboxPerso.IntersectsWith(hitboxLadder1) || hitboxPerso.IntersectsWith(hitboxLadder2) || hitboxPerso.IntersectsWith(hitboxLadder3);
         }
 
-
-        private void animegorille()
+        private void LancementTonneau()
         {
             for (int i = 0; i < nbTonneaux; i++)
             {
-                
-                double X = Canvas.GetLeft(imgTonneau[i]);
-                double Y = Canvas.GetBottom(imgTonneau[i]);
-                imgkonkeydong.Source = gorilles[2];
-                if (Canvas.GetBottom(imgTonneau[i]) >= 400 || testg== true)
+                if (!tonneauEnLancement[i] && !tonneauDeploye[i])
                 {
-                    imgkonkeydong.Source = gorilles[0];
-                    testg = false;
-
-                }
-                if (minuteri == 4)
-                {
-                    imgkonkeydong.Source = gorilles[1];
-                    testg = true;
+                    LancerTonneau(i);
+                    break;
                 }
             }
+        }
+
+        private void LancerAnimationGorille()
+        {
+            if (gorilleEnAnimation)
+                return;
+
+            gorilleEnAnimation = true;
+            gorilleFrame = 0;
+            gorilleTimer.Start();
+        }
+
+        private void GorilleAnimationTick(object sender, EventArgs e)
+        {
+            imgGorille.Source = gorilles[gorilleFrame];
+            gorilleFrame++;
+
+            if (gorilleFrame >= gorilles.Length)
+            {
+                gorilleTimer.Stop();
+                gorilleEnAnimation = false;
+                gorilleFrame = 0;
+                imgGorille.Source = gorilles[0];
+            }
+        }
+        private void LancerTonneau(int i)
+        {
+            Canvas.SetLeft(imgTonneau[i], 30);
+            Canvas.SetBottom(imgTonneau[i], 415);
+
+            tonneauEnLancement[i] = true;
+            tonneauDeploye[i] = true;
+
+            LancerAnimationGorille();
         }
     }
 }

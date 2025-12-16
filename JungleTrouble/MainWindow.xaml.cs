@@ -48,7 +48,6 @@ namespace JungleTrouble
             UCJeu uc = new UCJeu();
             ZoneJeu.Content = uc;
             //uc.RetourMenue.butoui.Click += AfficheDemarrage;
-
         }
 
         public static string Perso { get; set; }
