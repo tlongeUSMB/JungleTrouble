@@ -45,18 +45,22 @@ namespace JungleTrouble
         private bool estSurEchelle = false;
         private double vitesseGrimpe = 200;
         private BitmapImage[] persoMarche = new BitmapImage[2];
+        private BitmapImage[] gorilles = new BitmapImage[3];
         private int pas = 0;
         private double nbTonneaux = 1;
         private double vitesseTonneaux = 2;
         private Image[] imgTonneau = new Image[3];
         private int vies = 3;
         public bool perdu = false;
+        private int minuteri = 0;
+        private bool testg = true;
 
         public UCJeu()
         {
             InitializeComponent();
             InitializeTimer();
             InitializeImages();
+            animegorille();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -374,6 +378,11 @@ namespace JungleTrouble
                 persoMarche[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso + (i + 1)}.png"));
                 Console.WriteLine("Image " + i + " " + persoMarche[i]);
             }
+            for(int i = 0; i < 3; i++)
+            {
+                gorilles[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/gorille/gorille{i}.png"));
+                Console.WriteLine("Image " + i + " " + gorilles[i]);
+            }
             Console.WriteLine(persoMarche);
             imgTonneau[0] = imgTonneau1;
             imgTonneau[1] = imgTonneau2;
@@ -394,11 +403,20 @@ namespace JungleTrouble
         {
             for (int i = 0; i < nbTonneaux; i++)
             {
+                
                 double X = Canvas.GetLeft(imgTonneau[i]);
                 double Y = Canvas.GetBottom(imgTonneau[i]);
-                if (X == 415 && Y == 30)
-                { 
-                    
+                imgkonkeydong.Source = gorilles[2];
+                if (Canvas.GetBottom(imgTonneau[i]) >= 400 || testg== true)
+                {
+                    imgkonkeydong.Source = gorilles[0];
+                    testg = false;
+
+                }
+                if (minuteri == 4)
+                {
+                    imgkonkeydong.Source = gorilles[1];
+                    testg = true;
                 }
 
             }
