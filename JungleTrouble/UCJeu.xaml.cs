@@ -44,7 +44,7 @@ namespace JungleTrouble
         private bool[] tonneauAuSol = { false, false, false };
         private bool estSurEchelle = false;
         private double vitesseGrimpe = 200;
-        private BitmapImage[] persoMarche = new BitmapImage[2];
+        private BitmapImage[] persoMarche = new BitmapImage[3];
         private BitmapImage[] gorilles = new BitmapImage[3];
         private int pas = 0;
         private double nbTonneaux = 1;
@@ -216,13 +216,17 @@ namespace JungleTrouble
                 pas++;
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) + 5);
                 imgPerso.RenderTransform = new ScaleTransform(1, 1, imgPerso.Width / 2, imgPerso.Height / 2);
-                if (pas % 4 <= 1 && pas % 4 >= 0)
+                if (pas % 9 < 3)
                 {
                     imgPerso.Source = persoMarche[0];
                 }
-                else
+                else if (pas % 9 < 6 && pas % 9 >= 3)
                 {
                     imgPerso.Source = persoMarche[1];
+                }
+                else
+                {
+                    imgPerso.Source = persoMarche[2];
                 }
             }
             if (e.Key == Key.Left && Canvas.GetLeft(imgPerso) > 0)
@@ -230,13 +234,17 @@ namespace JungleTrouble
                 pas++;
                 Canvas.SetLeft(imgPerso, Canvas.GetLeft(imgPerso) - 5);
                 imgPerso.RenderTransform = new ScaleTransform(-1, 1, imgPerso.Width / 2, imgPerso.Height / 2);
-                if (pas % 4 <= 1 && pas % 4 >= 0)
+                if (pas % 9 < 3)
                 {
                     imgPerso.Source = persoMarche[0];
                 }
-                else
+                else if (pas % 9 < 6 && pas % 9 >= 3)
                 {
                     imgPerso.Source = persoMarche[1];
+                }
+                else
+                {
+                    imgPerso.Source = persoMarche[2];
                 }
             }
             if (e.Key == Key.Up)
