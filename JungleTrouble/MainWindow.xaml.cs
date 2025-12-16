@@ -23,7 +23,7 @@ namespace JungleTrouble
             AfficheDemarrage();
         }
 
-        private void AfficheDemarrage()
+        public void AfficheDemarrage()
         {
             UCRegles uc = new UCRegles();
 

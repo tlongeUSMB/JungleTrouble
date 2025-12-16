@@ -137,6 +137,7 @@ namespace JungleTrouble
             {
                 labFin.Content = "Game Over !";
                 labFin.Foreground = Brushes.Red;
+                imgPerso.Visibility = Visibility.Hidden;
             }
             else if (win)
             {
@@ -146,6 +147,12 @@ namespace JungleTrouble
             imgParcheminFin.Visibility = Visibility.Visible;
             labFin.Visibility = Visibility.Visible;
             butRestart.Visibility = Visibility.Visible;
+        }
+
+        private void butRestart_Click(object sender, RoutedEventArgs e)
+        {
+            minuterie?.Stop();
+            ((MainWindow)Application.Current.MainWindow).AfficheDemarrage();
         }
 
         private void CompteTonneaux(double deltaTime)
@@ -224,6 +231,8 @@ namespace JungleTrouble
         private int countimage = 0;
         private void canvasJeu_KeyDown(object sender, KeyEventArgs e)
         {
+            if (perdu || win)
+                return;
             double objX = Canvas.GetLeft(imgPerso);
             double objY = Canvas.GetBottom(imgPerso);
             Rect hitboxPerso = new Rect(objX, objY, WIDTHPERSO, HEIGHTPERSO);
