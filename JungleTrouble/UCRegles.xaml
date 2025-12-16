@@ -8,9 +8,10 @@
              d:DesignHeight="470" d:DesignWidth="800">
     <Viewbox Stretch="Uniform">
         <Grid Background="#00000000" Height="470" Width="800">
+            <Image Margin="42,104,37,100" Source="/Images/parchemin.png" Stretch="Fill"/>
             <Label x:Name="labtitre" Content="Jungle Trouble" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="-1.493,-2.24" Margin="0,60,0,60" FontFamily="Snap ITC" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" Foreground="#FFF5DD6C" />
             <Label x:Name="labrègles" Content="Oh non ! Kongey Dong, le vieux singe du village, est encore devenu fou !&#xD;&#xA;Il pense que des tigres sont à sa porte et balance des tonneaux &#xD;&#xA;dans la rue, il va finir par blesser quelqu’un ! &#xD;&#xA;Il faut que tu montes en haut de sa structure pour &#xD;&#xA;lui faire reprendre ses esprits par tous les moyens !&#xD;&#xA;Mais fais attention aux tonneaux, ils pèsent assez pour te transformer en crêpe… " HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" Height="162" Width="716" Margin="0,156,0,0" FontFamily="Papyrus" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" />
-            <Button x:Name="butstart" Content="Grimper !" HorizontalAlignment="Center" Margin="0,347,0,0" VerticalAlignment="Top" Height="47" Width="170" FontSize="25" Click="Button_Click"/>
+            <Button x:Name="butstart" Content="Grimper !" HorizontalAlignment="Center" Margin="0,370,0,0" VerticalAlignment="Top" Height="47" Width="170" FontSize="25" Click="Button_Click"/>
         </Grid>
     </Viewbox>
 </UserControl>

@@ -8,7 +8,8 @@
              d:DesignHeight="470" d:DesignWidth="800">
     <Viewbox Stretch="Uniform">
         <Grid Background="#00000000" Height="470" Width="800">
-            <Label Content="Choisi un Personnage" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Height="37" Width="568" FontSize="20" HorizontalContentAlignment="Center"/>
+            <Image Margin="0,25,0,-14" Source="/Images/parchemin.png" Stretch="Fill"/>
+            <Label Content="Choisi un Personnage" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="37" Width="568" FontSize="20" HorizontalContentAlignment="Center"/>
             <RadioButton x:Name="rbperso1" HorizontalAlignment="Left" Margin="155,200,0,0" VerticalAlignment="Top" Height="192" Width="116" Click="rbperso1_Click">
                 <Image Height="192" Source="/Images/Perso2/perso21.png" Stretch="Fill" Width="98"/>
             </RadioButton>
