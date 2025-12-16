@@ -9,6 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\gorille\gorille1.png" />
+    <None Remove="Images\gorille\gorille2.png" />
+    <None Remove="Images\gorille\gorille3.png" />
     <None Remove="Images\heart.png" />
     <None Remove="Images\ladder.png" />
     <None Remove="Images\parchemin.png" />
@@ -28,6 +31,9 @@
 
   <ItemGroup>
     <Resource Include="Images\Background.png" />
+    <Resource Include="Images\gorille\gorille1.png" />
+    <Resource Include="Images\gorille\gorille2.png" />
+    <Resource Include="Images\gorille\gorille3.png" />
     <Resource Include="Images\heart.png" />
     <Resource Include="Images\ladder.png" />
     <Resource Include="Images\parchemin.png" />

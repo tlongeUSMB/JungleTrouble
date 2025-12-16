@@ -24,15 +24,16 @@
                 <Image Height="195" Canvas.Left="720" Source="/Images/ladder.png" Stretch="Fill" Width="70" Canvas.Bottom="235" VerticalAlignment="Bottom"/>
                 <Image Height="195" Canvas.Left="10" Source="/Images/ladder.png" Stretch="Fill" Width="70" Canvas.Bottom="127.5" VerticalAlignment="Bottom"/>
                 <Image x:Name="imgPerso"  Height="40" Canvas.Left="10" Source="/Images/Perso1/perso11.png" Stretch="Fill" Canvas.Bottom="20" Width="24"/>
-                <Image x:Name="imgTonneau1" Height="30" Canvas.Left="15" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="400" Width="30"/>
-                <Image x:Name="imgTonneau2" Height="30" Canvas.Left="15" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="400" Width="30" />
-                <Image x:Name="imgTonneau3" Height="30" Canvas.Left="15" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="400" Width="30"/>
+                <Image x:Name="imgTonneau1" Height="30" Canvas.Left="30" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="415" Width="30"/>
+                <Image x:Name="imgTonneau2" Height="30" Canvas.Left="30" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="415" Width="30" />
+                <Image x:Name="imgTonneau3" Height="30" Canvas.Left="30" Source="/Images/placeholder3.png" Stretch="Fill" Canvas.Bottom="415" Width="30"/>
                 <Image x:Name="imgHeart1"  Height="10" Canvas.Left="12" Source="/Images/heart.png" Stretch="Fill" Canvas.Bottom="60" Width="10"/>
                 <Image x:Name="imgHeart2"  Height="10" Canvas.Left="22" Source="/Images/heart.png" Stretch="Fill" Canvas.Bottom="60" Width="10"/>
                 <Image x:Name="imgHeart3"  Height="10" Canvas.Left="32" Source="/Images/heart.png" Stretch="Fill" Canvas.Bottom="60" Width="10"/>
                 <Image x:Name="imgParcheminFin"  Source="/Images/parchemin.png" Stretch="Fill" Canvas.Left="213" Canvas.Top="68" Height="314" Width="374" Visibility="Hidden"/>
                 <Button x:Name="butRestart" Content="Recommencer" Canvas.Left="348" Canvas.Top="310" Height="30" Width="104" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Hidden"/>
                 <Label x:Name="labFin" FontFamily="Snap ITC" FontSize="30" Content="" Canvas.Left="269" Canvas.Top="136" Height="74" Width="262" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="Black" Visibility="Hidden"/>
+                <Image x:Name="konkeydong" Height="110" Canvas.Left="2" Source="/Images/gorille/gorille1.png" Stretch="Fill" Canvas.Top="-2" Width="86"/>
 
             </Canvas>
         </Grid>
