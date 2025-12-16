@@ -37,6 +37,7 @@ namespace JungleTrouble
         private static readonly Rect hitboxLadder1 = new Rect(720, 20, 70, 195);
         private static readonly Rect hitboxLadder2 = new Rect(10, 127.5, 70, 195);
         private static readonly Rect hitboxLadder3 = new Rect(720, 235, 70, 195);
+        private static readonly Rect hitboxGorille = new Rect(0, 342.5, 80, 100);
         private DateTime tempsPrecedent;
         private double vitesseVerticalePerso = 0.0;
         private double[] vitesseVerticaleTonneau = { 0.0, 0.0, 0.0 };
@@ -52,6 +53,7 @@ namespace JungleTrouble
         private Image[] imgTonneau = new Image[3];
         private int vies = 3;
         public bool perdu = false;
+        public bool win = false;
         private int minuteri = 0;
         private bool testg = true;
 
@@ -96,6 +98,7 @@ namespace JungleTrouble
             CompteTonneaux(deltaTime);
             MoveTonneaux(vitesseTonneaux);
             colisionTonneau();
+            win = WinCheck();
             estSurEchelle = VerifierEchelle();
             if (!estSurEchelle)
             {
@@ -113,6 +116,19 @@ namespace JungleTrouble
                 perdu = true;
                 AfficherFin();
             }
+            else if (win)
+            {
+                minuterie.Stop();
+                AfficherFin();
+            }
+        }
+
+        private bool WinCheck()
+        {
+            double x = Canvas.GetLeft(imgPerso);
+            double y = Canvas.GetBottom(imgPerso);
+            Rect hitboxPerso = new Rect(x, y, WIDTHPERSO, HEIGHTPERSO);
+            return hitboxPerso.IntersectsWith(hitboxGorille);
         }
 
         private void AfficherFin()
@@ -122,7 +138,7 @@ namespace JungleTrouble
                 labFin.Content = "Game Over !";
                 labFin.Foreground = Brushes.Red;
             }
-            else
+            else if (win)
             {
                 labFin.Content = "Bien joué !";
                 labFin.Foreground = Brushes.Green;
@@ -426,8 +442,7 @@ namespace JungleTrouble
                     imgkonkeydong.Source = gorilles[1];
                     testg = true;
                 }
-
             }
-            }
+        }
     }
 }
