@@ -313,6 +313,8 @@ namespace JungleTrouble
         {
             for (int i = 0; i < nbTonneaux; i++)
             {
+                if (Canvas.GetLeft(imgTonneau[i])==30 && Canvas.GetBottom(imgTonneau[i])==415)
+                    direction[i] = "right";
                 if (Canvas.GetLeft(imgTonneau[i]) > 770)
                 {
                     if (verif == false)
@@ -357,6 +359,8 @@ namespace JungleTrouble
                 Rect hitboxPerso = new Rect(objV, objW, WIDTHPERSO, HEIGHTPERSO);
                 if (hitboxPerso.IntersectsWith(hitboxtonneau))
                 {
+                    Canvas.SetLeft(imgTonneau[i], 30);
+                    Canvas.SetBottom(imgTonneau[i], 415);
                     Canvas.SetLeft(imgPerso, 0);
                     Canvas.SetBottom(imgPerso, 20);
                     vies--;
@@ -384,5 +388,20 @@ namespace JungleTrouble
             Rect hitboxPerso = new Rect(x, y, WIDTHPERSO, HEIGHTPERSO);
             return hitboxPerso.IntersectsWith(hitboxLadder1) || hitboxPerso.IntersectsWith(hitboxLadder2) || hitboxPerso.IntersectsWith(hitboxLadder3);
         }
+
+
+        private void animegorille()
+        {
+            for (int i = 0; i < nbTonneaux; i++)
+            {
+                double X = Canvas.GetLeft(imgTonneau[i]);
+                double Y = Canvas.GetBottom(imgTonneau[i]);
+                if (X == 415 && Y == 30)
+                { 
+                    
+                }
+
+            }
+            }
     }
 }
