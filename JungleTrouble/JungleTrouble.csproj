@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\heart.png" />
     <None Remove="Images\ladder.png" />
     <None Remove="Images\perso1statique.png" />
     <None Remove="Images\Perso1\perso1grimpe1.png" />
@@ -18,6 +19,7 @@
 
   <ItemGroup>
     <Resource Include="Images\Background.png" />
+    <Resource Include="Images\heart.png" />
     <Resource Include="Images\ladder.png" />
     <Resource Include="Images\Perso1\perso12.png" />
     <Resource Include="Images\Perso1\perso11.png" />

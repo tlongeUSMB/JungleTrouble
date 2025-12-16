@@ -49,10 +49,10 @@ namespace JungleTrouble
         private double nbTonneaux = 1;
         private double vitesseTonneaux = 2;
         private Image[] imgTonneau = new Image[3];
+        private int vies = 3;
 
         public UCJeu()
         {
-            
             InitializeComponent();
             InitializeTimer();
             InitializeImages();
@@ -88,6 +88,29 @@ namespace JungleTrouble
             tempsPrecedent = tempsActuel;
             AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
             AppliquerPhysique(imgTonneau[0],WHIDTHTONNEAU,HEIGTHTONNEAU,ref vitesseVerticaleTonneau[0],ref tonneauAuSol[0],deltaTime);
+            CompteTonneaux(deltaTime);
+            MoveTonneaux(vitesseTonneaux);
+            colisionTonneau();
+            estSurEchelle = VerifierEchelle();
+            if (!estSurEchelle)
+            {
+                AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
+            }
+            else
+            {
+                vitesseVerticalePerso = 0;
+                imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe1.png"));
+            }
+            DeplaceHearts();
+            if (vies <= 0)
+            {
+                minuterie.Stop();
+                MessageBox.Show("Game Over !");
+            }
+        }
+
+        private void CompteTonneaux(double deltaTime)
+        {
             if (nbTonneaux == 1)
             {
                 imgTonneau2.Visibility = Visibility.Hidden;
@@ -106,19 +129,8 @@ namespace JungleTrouble
                 imgTonneau2.Visibility = Visibility.Visible;
                 imgTonneau3.Visibility = Visibility.Visible;
             }
-            MoveTonneaux(vitesseTonneaux);
-            colisionTonneau();
-            estSurEchelle = VerifierEchelle();
-            if (!estSurEchelle)
-            {
-                AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
-            }
-            else
-            {
-                vitesseVerticalePerso = 0;
-                imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe1.png"));
-            }
         }
+
         private double HauteurPlateformeSousPerso(Image obj, double largeur, double hauteur, double yPrecedent)
         {
             double x = Canvas.GetLeft(obj);
@@ -224,6 +236,42 @@ namespace JungleTrouble
             }
         }
 
+        private void DeplaceHearts()
+        {
+            double y = Canvas.GetBottom(imgPerso) + HEIGHTPERSO;
+            double x = Canvas.GetLeft(imgPerso);
+            Canvas.SetBottom(imgHeart1, y);
+            Canvas.SetLeft(imgHeart1, x);
+            Canvas.SetBottom(imgHeart2, y);
+            Canvas.SetLeft(imgHeart2, x + 10);
+            Canvas.SetBottom(imgHeart3, y);
+            Canvas.SetLeft(imgHeart3, x + 20);
+            if (vies == 3)
+            {
+                imgHeart1.Visibility = Visibility.Visible;
+                imgHeart2.Visibility = Visibility.Visible;
+                imgHeart3.Visibility = Visibility.Visible;
+            }
+            else if (vies == 2)
+            {
+                imgHeart1.Visibility = Visibility.Visible;
+                imgHeart2.Visibility = Visibility.Visible;
+                imgHeart3.Visibility = Visibility.Hidden;
+            }
+            else if (vies == 1)
+            {
+                imgHeart1.Visibility = Visibility.Visible;
+                imgHeart2.Visibility = Visibility.Hidden;
+                imgHeart3.Visibility = Visibility.Hidden;
+            }
+            else if (vies <= 0)
+            {
+                imgHeart1.Visibility = Visibility.Hidden;
+                imgHeart2.Visibility = Visibility.Hidden;
+                imgHeart3.Visibility = Visibility.Hidden;
+            }
+        }
+
         private void canvasJeu_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Right || e.Key == Key.Left)
@@ -292,9 +340,9 @@ namespace JungleTrouble
                 {
                     Canvas.SetLeft(imgPerso, 0);
                     Canvas.SetBottom(imgPerso, 20);
+                    vies--;
                 }
             }
-
         }
         private void InitializeImages()
         {
@@ -310,7 +358,6 @@ namespace JungleTrouble
             imgTonneau2.Visibility = Visibility.Hidden;
             imgTonneau3.Visibility = Visibility.Hidden;
         }
-
         private bool VerifierEchelle()
         {
             double x = Canvas.GetLeft(imgPerso);
@@ -318,6 +365,5 @@ namespace JungleTrouble
             Rect hitboxPerso = new Rect(x, y, WIDTHPERSO, HEIGHTPERSO);
             return hitboxPerso.IntersectsWith(hitboxLadder1) || hitboxPerso.IntersectsWith(hitboxLadder2) || hitboxPerso.IntersectsWith(hitboxLadder3);
         }
-
     }
 }
