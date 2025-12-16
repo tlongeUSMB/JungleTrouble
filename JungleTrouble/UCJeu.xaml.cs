@@ -50,6 +50,7 @@ namespace JungleTrouble
         private double vitesseTonneaux = 2;
         private Image[] imgTonneau = new Image[3];
         private int vies = 3;
+        public bool perdu = false;
 
         public UCJeu()
         {
@@ -105,8 +106,26 @@ namespace JungleTrouble
             if (vies <= 0)
             {
                 minuterie.Stop();
-                MessageBox.Show("Game Over !");
+                perdu = true;
+                AfficherFin();
             }
+        }
+
+        private void AfficherFin()
+        {
+            if (perdu)
+            {
+                labFin.Content = "Game Over !";
+                labFin.Foreground = Brushes.Red;
+            }
+            else
+            {
+                labFin.Content = "Bien joué !";
+                labFin.Foreground = Brushes.Green;
+            }
+            imgParcheminFin.Visibility = Visibility.Visible;
+            labFin.Visibility = Visibility.Visible;
+            butRestart.Visibility = Visibility.Visible;
         }
 
         private void CompteTonneaux(double deltaTime)

@@ -22,14 +22,18 @@ namespace JungleTrouble
             InitializeComponent();
             AfficheDemarrage();
         }
+
         private void AfficheDemarrage()
         {
-            // crée et charge l'écran de démarrage
             UCRegles uc = new UCRegles();
 
-            // associe l'écran au conteneur
             ZoneJeu.Content = uc;
             uc.butstart.Click += AfficherChoixPerso;
+        }
+
+        private void AfficheDemarrage(object sender, RoutedEventArgs e)
+        {
+            AfficheDemarrage();
         }
 
         private void AfficherChoixPerso(object sender, RoutedEventArgs e)
@@ -38,15 +42,15 @@ namespace JungleTrouble
             ZoneJeu.Content = uc;
             uc.butJouer.Click += AfficherJeu;
         }
+
         private void AfficherJeu(object sender, RoutedEventArgs e)
         {
             UCJeu uc = new UCJeu();
             ZoneJeu.Content = uc;
             //uc.RetourMenue.butoui.Click += AfficheDemarrage;
+
         }
 
         public static string Perso { get; set; }
-
-
     }
 }

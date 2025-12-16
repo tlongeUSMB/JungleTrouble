@@ -30,6 +30,10 @@
                 <Image x:Name="imgHeart1"  Height="10" Canvas.Left="12" Source="/Images/heart.png" Stretch="Fill" Canvas.Bottom="60" Width="10"/>
                 <Image x:Name="imgHeart2"  Height="10" Canvas.Left="22" Source="/Images/heart.png" Stretch="Fill" Canvas.Bottom="60" Width="10"/>
                 <Image x:Name="imgHeart3"  Height="10" Canvas.Left="32" Source="/Images/heart.png" Stretch="Fill" Canvas.Bottom="60" Width="10"/>
+                <Image x:Name="imgParcheminFin"  Source="/Images/parchemin.png" Stretch="Fill" Canvas.Left="213" Canvas.Top="68" Height="314" Width="374" Visibility="Hidden"/>
+                <Button x:Name="butRestart" Content="Recommencer" Canvas.Left="348" Canvas.Top="310" Height="30" Width="104" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Hidden"/>
+                <Label x:Name="labFin" FontFamily="Snap ITC" FontSize="30" Content="" Canvas.Left="269" Canvas.Top="136" Height="74" Width="262" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="Black" Visibility="Hidden"/>
+
             </Canvas>
         </Grid>
     </Viewbox>
