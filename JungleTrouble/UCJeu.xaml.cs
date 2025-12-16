@@ -88,10 +88,16 @@ namespace JungleTrouble
             tempsPrecedent = tempsActuel;
             AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
             AppliquerPhysique(imgTonneau[0],WHIDTHTONNEAU,HEIGTHTONNEAU,ref vitesseVerticaleTonneau[0],ref tonneauAuSol[0],deltaTime);
-            if (nbTonneaux == 2)
+            if (nbTonneaux == 1)
+            {
+                imgTonneau2.Visibility = Visibility.Hidden;
+                imgTonneau3.Visibility = Visibility.Hidden;
+            }
+            else if (nbTonneaux == 2)
             {
                 AppliquerPhysique(imgTonneau[1], WHIDTHTONNEAU, HEIGTHTONNEAU, ref vitesseVerticaleTonneau[1], ref tonneauAuSol[1], deltaTime);
                 imgTonneau2.Visibility = Visibility.Visible;
+                imgTonneau3.Visibility = Visibility.Hidden;
             }
             else if (nbTonneaux == 3)
             {
