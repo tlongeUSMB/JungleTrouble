@@ -31,7 +31,8 @@
                 <Image x:Name="imgHeart2"  Height="10" Canvas.Left="22" Source="/Images/heart.png" Stretch="Fill" Canvas.Bottom="60" Width="10"/>
                 <Image x:Name="imgHeart3"  Height="10" Canvas.Left="32" Source="/Images/heart.png" Stretch="Fill" Canvas.Bottom="60" Width="10"/>
                 <Image x:Name="imgParcheminFin"  Source="/Images/parchemin.png" Stretch="Fill" Canvas.Left="213" Canvas.Top="68" Height="314" Width="374" Visibility="Hidden"/>
-                <Button x:Name="butRestart" Content="Recommencer" Canvas.Left="348" Canvas.Top="310" Height="30" Width="104" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Hidden" Click="butRestart_Click"/>
+                <Button x:Name="butRestart" Content="Recommencer" Canvas.Left="295" Canvas.Top="310" Height="30" Width="104" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden" Click="butRestart_Click"/>
+                <Button x:Name="butExit" Content="Quitter" Canvas.Left="405" Canvas.Top="310" Height="30" Width="104" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Hidden" Click="butExit_Click"/>
                 <Label x:Name="labFin" FontFamily="Snap ITC" FontSize="30" Content="" Canvas.Left="269" Canvas.Top="136" Height="74" Width="262" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="Black" Visibility="Hidden"/>
                 <Image x:Name="imgGorille" Height="100" Canvas.Left="0" Source="/Images/gorille/gorille0.png" Stretch="Fill" Canvas.Bottom="342.5" Width="80"/>
             </Canvas>

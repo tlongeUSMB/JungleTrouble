@@ -60,7 +60,7 @@ namespace JungleTrouble
         private int gorilleFrame = 0;
         private bool gorilleEnAnimation = false;
         private double delaiLancement = 0;
-
+        private MediaPlayer musique = new MediaPlayer();
         public UCJeu()
         {
             InitializeComponent();
@@ -82,9 +82,13 @@ namespace JungleTrouble
             bool? rep = parametreWindow.ShowDialog();
             nbTonneaux = parametreWindow.Slidnombre.Value;
             vitesseTonneaux = parametreWindow.Slidvitesse.Value;
+            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Musique/musique.mp3");
+            musique.Volume = parametreWindow.SlidSon.Value;
             Console.WriteLine("Nombre de tonneaux : " + nbTonneaux);
         }
-        
+
+
+
 
         private void InitializeTimer()
         {
@@ -165,12 +169,18 @@ namespace JungleTrouble
             imgParcheminFin.Visibility = Visibility.Visible;
             labFin.Visibility = Visibility.Visible;
             butRestart.Visibility = Visibility.Visible;
+            butExit.Visibility = Visibility.Visible;
         }
 
         private void butRestart_Click(object sender, RoutedEventArgs e)
         {
             minuterie?.Stop();
             ((MainWindow)Application.Current.MainWindow).AfficheDemarrage();
+        }
+
+        private void butExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         private void AfficheTonneaux(double deltaTime)
@@ -476,6 +486,7 @@ namespace JungleTrouble
             gorilleFrame = 0;
             gorilleTimer.Start();
         }
+
 
         private void GorilleAnimationTick(object sender, EventArgs e)
         {
