@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Security;
@@ -22,10 +23,11 @@ namespace JungleTrouble
     public partial class UCJeu : UserControl
     {
         private DispatcherTimer minuterie;
-        private static readonly double GRAVITY = -200;
-        private static readonly double JUMPSTRENGTH = 140;
+        private static readonly double GRAVITY = -300;
+        private static readonly double JUMPSTRENGTH = 180;
         private static readonly double WIDTHPERSO = 24, HEIGHTPERSO = 40;
         private static readonly double WHIDTHTONNEAU = 30, HEIGTHTONNEAU = 30;
+        private static readonly double[] hauteursPlateformes = { 20, 127.5, 235, 342.5 };
         private bool verif = false;
         private string[] direction = { "right", "right", "right" };
         private static BitmapImage[] persos1 = new BitmapImage[8];
@@ -61,6 +63,7 @@ namespace JungleTrouble
         private bool gorilleEnAnimation = false;
         private double delaiLancement = 0;
         private int pasEchelle = 0;
+        private int idEchelle = 0;
         public UCJeu()
         {
             InitializeComponent();
@@ -116,13 +119,10 @@ namespace JungleTrouble
                 delaiLancement = 0;
             }
             tempsPrecedent = tempsActuel;
-            AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
             AppliquerPhysique(imgTonneau[0],WHIDTHTONNEAU,HEIGTHTONNEAU,ref vitesseVerticaleTonneau[0],ref tonneauAuSol[0],deltaTime);
             AfficheTonneaux(deltaTime);
-            MoveTonneaux(vitesseTonneaux);
-            colisionTonneau();
             win = WinCheck();
-            estSurEchelle = VerifierEchelle();
+            idEchelle = VerifierEchelle();
             if (!estSurEchelle)
             {
                 AppliquerPhysique(imgPerso,WIDTHPERSO,HEIGHTPERSO,ref vitesseVerticalePerso,ref persoAuSol,deltaTime);
@@ -321,7 +321,7 @@ namespace JungleTrouble
                         imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe2.png"));
                     }
                 }
-                else if (e.Key == Key.Down)
+                else if (e.Key == Key.Down && objY >= hauteursPlateformes[idEchelle - 1])
                 {
                     y -= vitesseGrimpe * 0.016;
                     Canvas.SetBottom(imgPerso, y);
@@ -475,12 +475,31 @@ namespace JungleTrouble
             imgTonneau2.Visibility = Visibility.Hidden;
             imgTonneau3.Visibility = Visibility.Hidden;
         }
-        private bool VerifierEchelle()
+        private int VerifierEchelle()
         {
             double x = Canvas.GetLeft(imgPerso);
             double y = Canvas.GetBottom(imgPerso);
             Rect hitboxPerso = new Rect(x, y, WIDTHPERSO, HEIGHTPERSO);
-            return hitboxPerso.IntersectsWith(hitboxLadder1) || hitboxPerso.IntersectsWith(hitboxLadder2) || hitboxPerso.IntersectsWith(hitboxLadder3);
+            if (hitboxPerso.IntersectsWith(hitboxLadder1))
+            {
+                estSurEchelle = true;
+                return 1;
+            }
+            else if (hitboxPerso.IntersectsWith(hitboxLadder2))
+            {
+                estSurEchelle = true;
+                return 2;
+            }
+            else if (hitboxPerso.IntersectsWith(hitboxLadder3))
+            {
+                estSurEchelle = true;
+                return 3;
+            }
+            else
+            {
+                estSurEchelle = false;
+                return 0;
+            }
         }
 
         private void LancementTonneau()
