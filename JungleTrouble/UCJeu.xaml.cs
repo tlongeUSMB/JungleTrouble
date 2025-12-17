@@ -60,7 +60,6 @@ namespace JungleTrouble
         private int gorilleFrame = 0;
         private bool gorilleEnAnimation = false;
         private double delaiLancement = 0;
-        private MediaPlayer musique = new MediaPlayer();
         public UCJeu()
         {
             InitializeComponent();
@@ -82,8 +81,6 @@ namespace JungleTrouble
             bool? rep = parametreWindow.ShowDialog();
             nbTonneaux = parametreWindow.Slidnombre.Value;
             vitesseTonneaux = parametreWindow.Slidvitesse.Value;
-            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Musique/musique.mp3");
-            musique.Volume = parametreWindow.SlidSon.Value;
             Console.WriteLine("Nombre de tonneaux : " + nbTonneaux);
         }
 

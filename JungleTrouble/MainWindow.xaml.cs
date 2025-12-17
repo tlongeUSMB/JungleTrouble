@@ -40,8 +40,6 @@ namespace JungleTrouble
         {
             ParametreWindow parametreWindow = new ParametreWindow();
             bool? rep = parametreWindow.ShowDialog();
-            volume = parametreWindow.SlidSon.Value;
-            mediaPlayer.Volume = volume;
         }
 
         private void AfficheDemarrage(object sender, RoutedEventArgs e)

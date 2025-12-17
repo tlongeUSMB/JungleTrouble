@@ -5,17 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JungleTrouble"
         mc:Ignorable="d"
-        Title="Paramètres" Height="450" Width="300">
+        Title="Paramètres" Height="350" Width="300">
     <Grid>
-        
-        <Label Content="Son :" HorizontalAlignment="Left" Margin="25,23,0,0" VerticalAlignment="Top" Width="217" Height="25" FontSize="14"/>
-        <Label Content="Vitesse des tonneaux :&#xD;&#xA;" HorizontalAlignment="Left" Margin="25,160,0,0" VerticalAlignment="Top" Width="265" Height="25" FontSize="14"/>
-        <Label Content="Nombre de tonneaux :" HorizontalAlignment="Left" Margin="25,250,0,0" VerticalAlignment="Top" Width="265" Height="25"/>
-        <Slider x:Name="SlidSon" HorizontalAlignment="Center" Margin="0,66,0,0" VerticalAlignment="Top" Width="120" Minimum="0" Maximum="100" Value="0.5" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
-        <Slider x:Name="Slidvitesse" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Width="120" Minimum="1" Maximum="4" TickFrequency="1" Value="2" IsSnapToTickEnabled="True"/>
-        <Slider x:Name="Slidnombre" HorizontalAlignment="Center" Margin="0,290,0,0" VerticalAlignment="Top" Width="120" Minimum="1" Maximum="3" TickFrequency="1" Value="1" IsSnapToTickEnabled="True"/>
-        <Label Content="Jeu :" HorizontalAlignment="Left" Margin="25,110,0,0" VerticalAlignment="Top" Height="50" Width="265" FontSize="20"/>
+        <Label Content="Vitesse des tonneaux :&#xD;&#xA;" HorizontalAlignment="Left" Margin="25,67,0,0" VerticalAlignment="Top" Width="265" Height="25" FontSize="14"/>
+        <Label Content="Nombre de tonneaux :" HorizontalAlignment="Left" Margin="25,166,0,0" VerticalAlignment="Top" Width="265" Height="25"/>
+        <Slider x:Name="Slidvitesse" HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" Width="120" Minimum="1" Maximum="4" TickFrequency="1" Value="2" IsSnapToTickEnabled="True"/>
+        <Slider x:Name="Slidnombre" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Width="120" Minimum="1" Maximum="3" TickFrequency="1" Value="1" IsSnapToTickEnabled="True"/>
+        <Label Content="Jeu :" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" Height="50" Width="264" FontSize="20"/>
         <Button x:Name="butclause" Content="X  " HorizontalAlignment="Right" VerticalAlignment="Top" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" Height="25" Width="25" Click="butclause_Click"/>
-        <Button x:Name="butOk" Content="OK" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" Height="34" Width="90" Click="butOk_Click"/>
+        <Button x:Name="butOk" Content="OK" HorizontalAlignment="Center" Margin="0,286,0,0" VerticalAlignment="Top" Height="34" Width="90" Click="butOk_Click"/>
     </Grid>
 </Window>
