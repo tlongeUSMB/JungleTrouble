@@ -78,11 +78,14 @@ namespace JungleTrouble
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            minuterie.Stop();
             ParametreWindow parametreWindow = new ParametreWindow();
             bool? rep = parametreWindow.ShowDialog();
             nbTonneaux = parametreWindow.Slidnombre.Value;
             vitesseTonneaux = parametreWindow.Slidvitesse.Value;
-            Console.WriteLine("Nombre de tonneaux : " + nbTonneaux);
+            InitializeTimer();
+            InitializeImages();
+            InitializeGorilleAnimation();
         }
 
 
