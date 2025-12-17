@@ -307,7 +307,7 @@ namespace JungleTrouble
             if (estSurEchelle)
             {
                 double y = Canvas.GetBottom(imgPerso);
-                if (e.Key == Key.Up && !hitboxPerso.IntersectsWith(hitboxPlateforme1) && !hitboxPerso.IntersectsWith(hitboxPlateforme2) && !hitboxPerso.IntersectsWith(hitboxPlateforme3))
+                if (e.Key == Key.Up && (hauteursPlateformes[idEchelle] + 165) > objY)
                 {
                     y += vitesseGrimpe * 0.016;
                     Canvas.SetBottom(imgPerso, y);
@@ -321,7 +321,7 @@ namespace JungleTrouble
                         imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe2.png"));
                     }
                 }
-                else if (e.Key == Key.Down && objY >= hauteursPlateformes[idEchelle - 1])
+                else if (e.Key == Key.Down && objY >= hauteursPlateformes[idEchelle])
                 {
                     y -= vitesseGrimpe * 0.016;
                     Canvas.SetBottom(imgPerso, y);
@@ -484,22 +484,22 @@ namespace JungleTrouble
             if (hitboxPerso.IntersectsWith(hitboxLadder1))
             {
                 estSurEchelle = true;
-                return 1;
+                return 0;
             }
             else if (hitboxPerso.IntersectsWith(hitboxLadder2))
             {
                 estSurEchelle = true;
-                return 2;
+                return 1;
             }
             else if (hitboxPerso.IntersectsWith(hitboxLadder3))
             {
                 estSurEchelle = true;
-                return 3;
+                return 2;
             }
             else
             {
                 estSurEchelle = false;
-                return 0;
+                return 3;
             }
         }
 
