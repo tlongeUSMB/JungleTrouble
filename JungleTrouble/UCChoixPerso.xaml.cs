@@ -39,6 +39,7 @@ namespace JungleTrouble
         {
             ParametreWindow parametreWindow = new ParametreWindow();
             bool? rep = parametreWindow.ShowDialog();
+            
         }
 
     }

@@ -22,6 +22,7 @@ namespace JungleTrouble
             InitializeComponent();
         }
 
+
         private void butOk_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

@@ -17,11 +17,16 @@ namespace JungleTrouble
     /// </summary>
     public partial class MainWindow : Window
     {
+        public double volume = 0.5;
         public MainWindow()
         {
             InitializeComponent();
+            mediaPlayer.Open(new System.Uri("Musique/musique.mp3", System.UriKind.Relative));
+            mediaPlayer.Play();
             AfficheDemarrage();
         }
+
+        public MediaPlayer mediaPlayer = new MediaPlayer();
 
         public void AfficheDemarrage()
         {
@@ -29,6 +34,14 @@ namespace JungleTrouble
 
             ZoneJeu.Content = uc;
             uc.butstart.Click += AfficherChoixPerso;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ParametreWindow parametreWindow = new ParametreWindow();
+            bool? rep = parametreWindow.ShowDialog();
+            volume = parametreWindow.SlidSon.Value;
+            mediaPlayer.Volume = volume;
         }
 
         private void AfficheDemarrage(object sender, RoutedEventArgs e)
@@ -47,7 +60,6 @@ namespace JungleTrouble
         {
             UCJeu uc = new UCJeu();
             ZoneJeu.Content = uc;
-            //uc.RetourMenue.butoui.Click += AfficheDemarrage;
         }
 
         public static string Perso { get; set; }

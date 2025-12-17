@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JungleTrouble"
         mc:Ignorable="d"
-        Title="Jungle Trouble" Height="490" Width="800">
+        Title="Jungle Trouble" Height="490" Width="800"
+        Icon="/monke.ico">
     <ContentControl x:Name="ZoneJeu" />
     <Window.Background>
         <ImageBrush ImageSource="/Images/Background.png"/>

@@ -25,6 +25,14 @@
     <None Remove="Images\Perso2\perso2saut.png" />
     <None Remove="Images\placeholder3.png" />
     <None Remove="Images\plank.png" />
+    <None Remove="monke.ico" />
+    <None Remove="Musique\musique.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Musique\musique.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +57,7 @@
     <Resource Include="Images\Perso2\perso2saut.png" />
     <Resource Include="Images\placeholder3.png" />
     <Resource Include="Images\plank.png" />
+    <Resource Include="monke.ico" />
   </ItemGroup>
 
 </Project>

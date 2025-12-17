@@ -22,10 +22,10 @@ namespace JungleTrouble
     public partial class UCJeu : UserControl
     {
         private DispatcherTimer minuterie;
-        private double GRAVITY = -200;
-        private double JUMPSTRENGTH = 140;
-        private double WIDTHPERSO = 24, HEIGHTPERSO = 40;
-        private double WHIDTHTONNEAU = 30, HEIGTHTONNEAU = 30;
+        private static readonly double GRAVITY = -200;
+        private static readonly double JUMPSTRENGTH = 140;
+        private static readonly double WIDTHPERSO = 24, HEIGHTPERSO = 40;
+        private static readonly double WHIDTHTONNEAU = 30, HEIGTHTONNEAU = 30;
         private bool verif = false;
         private string[] direction = { "right", "right", "right" };
         private static BitmapImage[] persos1 = new BitmapImage[8];
@@ -54,8 +54,6 @@ namespace JungleTrouble
         private int vies = 3;
         public bool perdu = false;
         public bool win = false;
-        private int minuteri = 0;
-        private bool testg = true;
         private bool[] tonneauEnLancement = { false, false, false };
         private bool[] tonneauDeploye = { true, false, false };
         private DispatcherTimer gorilleTimer;
@@ -74,7 +72,7 @@ namespace JungleTrouble
         private void InitializeGorilleAnimation()
         {
             gorilleTimer = new DispatcherTimer();
-            gorilleTimer.Interval = TimeSpan.FromMilliseconds(150);
+            gorilleTimer.Interval = TimeSpan.FromMilliseconds(200);
             gorilleTimer.Tick += GorilleAnimationTick;
         }
 
@@ -388,7 +386,10 @@ namespace JungleTrouble
                 else if (Canvas.GetLeft(imgTonneau[i]) <= 0)
                 {
                     if (Canvas.GetBottom(imgTonneau[i]) == 20)
+                    {
+                        LancerTonneau(i);
                         Canvas.SetBottom(imgTonneau[i], 400);
+                    }
                     if (verif == false)
                     {
                         direction[i] = "right";
