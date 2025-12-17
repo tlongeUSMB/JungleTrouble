@@ -18,9 +18,6 @@
                 </Image>
             </RadioButton>
             <Button x:Name="butJouer" Content="Grimper" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="98" FontSize="20" VerticalContentAlignment="Center" Margin="0,75,0,0" IsEnabled="False"/>
-            <Menu Height="20" Width="800" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left">
-                <MenuItem x:Name="MenuItem" Header="_Paramètres" Click="MenuItem_Click" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            </Menu>
         </Grid>
     </Viewbox>
 </UserControl>

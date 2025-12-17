@@ -60,6 +60,7 @@ namespace JungleTrouble
         private int gorilleFrame = 0;
         private bool gorilleEnAnimation = false;
         private double delaiLancement = 0;
+        private int pasEchelle = 0;
         public UCJeu()
         {
             InitializeComponent();
@@ -126,7 +127,6 @@ namespace JungleTrouble
             else
             {
                 vitesseVerticalePerso = 0;
-                imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe1.png"));
             }
             DeplaceHearts();
             if (vies <= 0)
@@ -308,11 +308,29 @@ namespace JungleTrouble
                 {
                     y += vitesseGrimpe * 0.016;
                     Canvas.SetBottom(imgPerso, y);
+                    pas++;
+                    if (pas % 9 < 5)
+                    {
+                        imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe1.png"));
+                    }
+                    else if (pas % 9 >= 5)
+                    {
+                        imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe2.png"));
+                    }
                 }
                 else if (e.Key == Key.Down)
                 {
                     y -= vitesseGrimpe * 0.016;
                     Canvas.SetBottom(imgPerso, y);
+                    pas++;
+                    if (pas % 9 < 5)
+                    {
+                        imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe1.png"));
+                    }
+                    else if (pas % 9 >= 5)
+                    {
+                        imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}grimpe2.png"));
+                    }
                 }
             }
         }
