@@ -460,6 +460,7 @@ namespace JungleTrouble
         {
             for (int i = 0; i < persoMarche.Length; i++)
             {
+                imgPerso.Source = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso}1.png"));
                 persoMarche[i] = new BitmapImage(new Uri($"pack://application:,,,/Images/Perso{MainWindow.Perso}/perso{MainWindow.Perso + (i + 1)}.png"));
                 Console.WriteLine("Image " + i + " " + persoMarche[i]);
             }
